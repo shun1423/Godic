@@ -1,7 +1,7 @@
 // react
-import * as React from 'react';
+import * as React from "react";
 // csstype
-import { Property } from 'csstype';
+import { Property } from "csstype";
 // type
 interface NameLogoProps {
   bgBorder?: Property.BorderRadius;
@@ -15,31 +15,33 @@ interface NameLogoProps {
 const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
   const {
     bgBorder = 4,
-    bgColor = 'wheat',
-    color = 'inherit',
-    fontSize = 'inherit',
-    name = 'Name',
+    bgColor = "wheat",
+    color = "inherit",
+    fontSize = "inherit",
+    name = "Name",
     onClick,
   } = props;
   return (
     <div
       onClick={onClick && onClick}
       style={{
-        alignItems: 'center',
-        cursor: 'pointer',
-        display: 'flex',
-        flexDirection: 'row',
-        justifyContent: 'center',
-        position: 'relative',
-        width: 'fit-content',
+        alignItems: "center",
+        cursor: "pointer",
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        position: "relative",
+        width: "fit-content",
+        height: "70px",
+        padding: "10px",
       }}
     >
       <div
         style={{
-          alignItems: 'center',
+          alignItems: "center",
           backgroundColor: bgColor,
           borderRadius: bgBorder,
-          display: 'flex',
+          display: "flex",
           height: 30,
           width: 30,
         }}
@@ -47,12 +49,12 @@ const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
       <p
         style={{
           color,
-          fontSize,
-          fontWeight: 'bold',
-          left: 10,
-          position: 'absolute',
-          textTransform: 'capitalize',
-          whiteSpace: 'nowrap',
+          padding: "10px",
+          fontSize: "40px",
+          fontWeight: "bold",
+          position: "relative",
+          textTransform: "capitalize",
+          whiteSpace: "nowrap",
         }}
       >
         {name}

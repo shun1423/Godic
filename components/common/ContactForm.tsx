@@ -1,51 +1,69 @@
-// react
-import * as React from 'react';
-// formik
-import { Formik } from 'formik';
-// @mui
+import * as React from "react";
+import { Formik, Field } from "formik";
 import {
-  Card,
-  CardProps,
-  CardActions,
-  CardContent,
-  CardHeader,
+  Box,
   Typography,
-  styled,
-} from '@mui/material';
-// custom component
-import CustomTextField from 'components/common/CustomTextField';
-import CustomButton from 'components/common/CustomButton';
-// validation
-import { ContactFormSchema } from 'models/contactFormModel';
-// type
-interface ContactFormProps {}
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  Checkbox,
+  MenuItem,
+  Select,
+  InputLabel,
+  Button,
+  TextField,
+} from "@mui/material";
+import { ContactFormSchema } from "models/contactFormModel";
 
-const CustomCard = styled(Card)<CardProps>(({ theme }) => ({
-  maxWidth: '32rem',
-}));
+const koreanRegions = [
+  "서울",
+  "경기",
+  "인천",
+  "강원",
+  "충북",
+  "충남",
+  "대전",
+  "세종",
+  "경북",
+  "경남",
+  "대구",
+  "부산",
+  "울산",
+  "전북",
+  "전남",
+  "광주",
+  "제주",
+];
 
-const ContactForm: React.FunctionComponent<ContactFormProps> = (props) => {
-  const toCapitalize = (string: string) => {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  };
-
+const ContactForm: React.FunctionComponent = () => {
   return (
-    <CustomCard>
-      <CardHeader
-        title={
-          <Typography color="primary" component="h2" variant="h5">
-            Contact form
-          </Typography>
-        }
-        subheader={
-          <Typography component="p" variant="subtitle1" color="text.disabled">
-            Lorem ipsum dolor sit amet.
-          </Typography>
-        }
-      />
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "800px",
+        margin: "0 auto",
+        padding: "2rem",
+        backgroundColor: "#fafafa",
+        borderRadius: "8px",
+        boxShadow: "0 4px 12px rgba(0, 0, 0, 0.1)",
+      }}
+    >
+      <Typography variant="h4" component="h2" textAlign="center" gutterBottom>
+        상담 신청 폼
+      </Typography>
 
       <Formik
-        initialValues={{ name: '', email: '', subject: '', message: '' }}
+        initialValues={{
+          paths: [],
+          name: "",
+          phone: "",
+          location: "",
+          area: "",
+          startDate: "",
+          budget: "",
+          description: "",
+          images: [],
+        }}
         onSubmit={(values) => console.log(values)}
         validationSchema={ContactFormSchema}
       >
@@ -53,111 +71,157 @@ const ContactForm: React.FunctionComponent<ContactFormProps> = (props) => {
           errors,
           touched,
           values,
+          setFieldValue,
           handleChange,
           handleBlur,
           handleSubmit,
           handleReset,
         }) => (
-          <>
-            <CardContent
-              sx={{
-                paddingBottom: 0,
-                padding: 0,
-                margin: '1rem',
-              }}
-            >
-              <form onReset={handleReset} onSubmit={handleSubmit} noValidate>
-                <CustomTextField
-                  error={touched.name && errors.name ? true : false}
-                  fullWidth
-                  helperText={touched.name && errors.name && errors.name}
-                  id="contact-form-name"
-                  label={toCapitalize('name')}
-                  name="name"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  sx={{ marginBottom: '1rem' }}
-                  type="text"
-                  value={values.name}
-                  variant="outlined"
-                />
-                <CustomTextField
-                  error={touched.email && errors.email ? true : false}
-                  fullWidth
-                  helperText={touched.email && errors.email && errors.email}
-                  id="contact-form-email"
-                  label={toCapitalize('email')}
-                  name="email"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  required
-                  sx={{ marginBottom: '1rem' }}
-                  type="email"
-                  value={values.email}
-                  variant="outlined"
-                />
-                <CustomTextField
-                  error={touched.subject && errors.subject ? true : false}
-                  fullWidth
-                  helperText={
-                    touched.subject && errors.subject && errors.subject
-                  }
-                  label={toCapitalize('subject')}
-                  name="subject"
-                  id="contact-form-subject"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  sx={{ marginBottom: '1rem' }}
-                  type="text"
-                  value={values.subject}
-                  variant="outlined"
-                />
-                <CustomTextField
-                  error={touched.message && errors.message ? true : false}
-                  fullWidth
-                  helperText={
-                    touched.message && errors.message && errors.message
-                  }
-                  id="contact-form-message"
-                  label={toCapitalize('message')}
-                  maxRows={6}
-                  minRows={4}
-                  multiline
-                  name="message"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  required
-                  type="text"
-                  value={values.message}
-                  variant="outlined"
-                />
-              </form>
-            </CardContent>
-            <CardActions
-              sx={{ justifyContent: 'flex-end', margin: '1rem', padding: 0 }}
-            >
-              <CustomButton onClick={() => handleReset()} type="reset">
-                Reset
-              </CustomButton>
-              <CustomButton
-                onClick={() => {
-                  let resetForm = true;
-                  handleSubmit();
-                  for (let item in errors) {
-                    if (item) resetForm = false;
-                  }
-                  if (resetForm) handleReset();
-                }}
-                type="submit"
-                variant="contained"
+          <form onSubmit={handleSubmit} noValidate>
+            {/* 고딕을 알게 된 경로 */}
+            <FormControl component="fieldset" sx={{ marginBottom: "1rem" }}>
+              <Typography variant="h6">고딕을 알게된 경로</Typography>
+              <FormGroup row>
+                {["인스타그램", "홈페이지", "소개", "네이버 검색", "기타"].map(
+                  (label) => (
+                    <FormControlLabel
+                      key={label}
+                      control={
+                        <Checkbox
+                          value={label}
+                          checked={values.paths?.includes(label) || false}
+                          onChange={(e) => {
+                            const newPaths = e.target.checked
+                              ? [...(values.paths || []), label]
+                              : values.paths.filter((path) => path !== label);
+                            setFieldValue("paths", newPaths);
+                          }}
+                        />
+                      }
+                      label={label}
+                    />
+                  )
+                )}
+              </FormGroup>
+            </FormControl>
+
+            {/* 성함 */}
+            <TextField
+              fullWidth
+              label="성함"
+              name="name"
+              value={values.name}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.name && Boolean(errors.name)}
+              helperText={touched.name && errors.name}
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 연락처 */}
+            <TextField
+              fullWidth
+              label="연락처"
+              name="phone"
+              value={values.phone}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={touched.phone && Boolean(errors.phone)}
+              helperText={touched.phone && errors.phone}
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 지역 선택 */}
+            <FormControl fullWidth sx={{ marginBottom: "1rem" }}>
+              <InputLabel>지역</InputLabel>
+              <Select
+                name="location"
+                value={values.location}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                error={touched.location && Boolean(errors.location)}
               >
-                Submit
-              </CustomButton>
-            </CardActions>
-          </>
+                {koreanRegions.map((region) => (
+                  <MenuItem key={region} value={region}>
+                    {region}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            {/* 평수 */}
+            <TextField
+              fullWidth
+              label="평수"
+              name="area"
+              value={values.area}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 공사 희망일 */}
+            <TextField
+              fullWidth
+              label="공사희망일"
+              name="startDate"
+              type="date"
+              InputLabelProps={{ shrink: true }}
+              value={values.startDate}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 예산 */}
+            <TextField
+              fullWidth
+              label="예산"
+              name="budget"
+              value={values.budget}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 상세 설명 */}
+            <TextField
+              fullWidth
+              label="상세설명 (자세히 기재해주세요)"
+              name="description"
+              multiline
+              minRows={4}
+              value={values.description}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 이미지 첨부 */}
+            <TextField
+              fullWidth
+              name="images"
+              type="file"
+              inputProps={{ multiple: true }}
+              onChange={(e) =>
+                setFieldValue("images", Array.from(e.currentTarget.files))
+              }
+              sx={{ marginBottom: "1rem" }}
+            />
+
+            {/* 버튼 그룹 */}
+            <Box display="flex" justifyContent="flex-end" gap="1rem">
+              <Button onClick={handleReset} type="reset" variant="outlined">
+                초기화
+              </Button>
+              <Button type="submit" variant="contained">
+                보내기
+              </Button>
+            </Box>
+          </form>
         )}
       </Formik>
-    </CustomCard>
+    </Box>
   );
 };
 

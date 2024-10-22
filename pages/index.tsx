@@ -1,16 +1,17 @@
 // react
-import * as React from 'react';
+import * as React from "react";
 // custom component
-import About from 'components/section/About';
-import HireMe from 'components/section/HireMe';
-import HomeHero from 'components/section/HomeHero';
-import MainLayout from 'components/layout/MainLayout';
-import RecentProjects from 'components/section/RecentProjects';
-import Skills from 'components/section/Skills';
+import About from "components/section/About";
+import HireMe from "components/section/HireMe";
+import HomeHero from "components/section/HomeHero";
+import MainLayout from "components/layout/MainLayout";
+import RecentProjects from "components/section/RecentProjects";
+import Skills from "components/section/Skills";
 // custom context
-import ConstantsContext from 'context/constantsContext';
+import ConstantsContext from "context/constantsContext";
 // type
-import type { NextPage } from 'next';
+import type { NextPage } from "next";
+import AboutMid from "components/section/AboutMid";
 
 const Home: NextPage = () => {
   const { pages } = React.useContext(ConstantsContext);
@@ -21,8 +22,9 @@ const Home: NextPage = () => {
         <HomeHero />
         <About />
         <Skills />
-        <HireMe />
+        <AboutMid />
         <RecentProjects />
+        <HireMe />
       </MainLayout>
     </>
   );
