@@ -142,6 +142,7 @@ const locationOptions = {
 
 const ContactForm: React.FunctionComponent = () => {
   const [selectedCity, setSelectedCity] = React.useState<string>("");
+  const [subLocation, setSubLocation] = React.useState<string>("");
 
   return (
     <Box
@@ -166,6 +167,7 @@ const ContactForm: React.FunctionComponent = () => {
           name: "",
           phone: "",
           location: "",
+          subLocation: "", // 추가
           area: "",
           startDate: "",
           budget: "",
@@ -235,6 +237,7 @@ const ContactForm: React.FunctionComponent = () => {
                   const city = e.target.value as string;
                   setFieldValue("location", city);
                   setSelectedCity(city);
+                  setFieldValue("subLocation", ""); // subLocation 초기화
                 }}
                 onBlur={handleBlur}
                 error={touched.location && Boolean(errors.location)}
@@ -253,8 +256,12 @@ const ContactForm: React.FunctionComponent = () => {
                 <InputLabel>구</InputLabel>
                 <Select
                   name="subLocation"
-                  value={values.subLocation || ""}
-                  onChange={handleChange}
+                  value={values.subLocation}
+                  onChange={(e) => {
+                    const subLocation = e.target.value as string;
+                    setFieldValue("subLocation", subLocation);
+                    setSubLocation(subLocation);
+                  }}
                   onBlur={handleBlur}
                   error={touched.subLocation && Boolean(errors.subLocation)}
                 >
