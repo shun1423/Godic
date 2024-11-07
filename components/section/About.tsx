@@ -48,7 +48,7 @@ const CustomCard = styled(Card)<CardProps>(({ theme }) => ({
     height: "fit-content",
   },
   [theme.breakpoints.up("lg")]: {
-    height: "90vh",
+    height: "100%",
   },
 }));
 
@@ -139,13 +139,6 @@ const About: React.FunctionComponent<AboutProps> = (props) => {
                   </Typography>
                 </Box>
               </CardContent>
-              <CustomCardActions disableSpacing>
-                <div>
-                  <FacebookIconLink />
-                  <InstagramIconLink />
-                  <TwitterIconLink />
-                </div>
-              </CustomCardActions>
             </Card>
           </Grid>
         </ContainerGrid>
