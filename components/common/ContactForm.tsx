@@ -21,7 +21,7 @@ interface ContactFormValues {
   name: string;
   phone: string;
   location: string;
-  subLocation: string; // 추가
+  subLocation: string; // 추가 후
   area: string;
   startDate: string;
   budget: string;
