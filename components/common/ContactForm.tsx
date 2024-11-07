@@ -232,19 +232,15 @@ const ContactForm: React.FunctionComponent = () => {
               <InputLabel>지역</InputLabel>
               <Select
                 name="location"
-                value={values.location === "서울" ? values.subLocation : ""}
+                value={values.location} // 변경: values.location을 사용
                 onChange={(e) => {
-                  const city = e.target.value as string;
+                  const city = e.target.value;
                   setFieldValue("location", city);
-                  setSelectedCity(city);
                   setFieldValue("subLocation", ""); // subLocation 초기화
+                  setSelectedCity(city);
                 }}
                 onBlur={handleBlur}
-                error={
-                  values.location === "서울" &&
-                  touched.subLocation &&
-                  Boolean(errors.subLocation)
-                }
+                error={touched.location && Boolean(errors.location)}
               >
                 {Object.keys(locationOptions).map((city) => (
                   <MenuItem key={city} value={city}>
@@ -253,25 +249,19 @@ const ContactForm: React.FunctionComponent = () => {
                 ))}
               </Select>
             </FormControl>
-
             {/* 구 선택 (서울일 경우만) */}
             {selectedCity === "서울" && (
               <FormControl fullWidth sx={{ marginBottom: "1rem" }}>
                 <InputLabel>구</InputLabel>
                 <Select
                   name="subLocation"
-                  value={values.location === "서울" ? values.subLocation : ""}
+                  value={values.subLocation} // 변경: values.subLocation을 직접 참조
                   onChange={(e) => {
-                    const subLocation = e.target.value as string;
+                    const subLocation = e.target.value;
                     setFieldValue("subLocation", subLocation);
-                    setSubLocation(subLocation);
                   }}
                   onBlur={handleBlur}
-                  error={
-                    values.location === "서울" &&
-                    touched.subLocation &&
-                    Boolean(errors.subLocation)
-                  }
+                  error={touched.subLocation && Boolean(errors.subLocation)}
                 >
                   {locationOptions["서울"].map((district) => (
                     <MenuItem key={district} value={district}>
