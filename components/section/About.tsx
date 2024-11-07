@@ -1,8 +1,5 @@
-// react
 import * as React from "react";
-// next
 import Image from "next/image";
-// @mui
 import {
   Box,
   BoxProps,
@@ -18,20 +15,18 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-// custom component
 import FacebookIconLink from "components/common/FacebookIconLink";
 import InstagramIconLink from "components/common/InstagramIconLink";
 import TwitterIconLink from "components/common/TwitterIconLink";
 import ContainerGrid from "components/common/ContainerGrid";
-import ExpandMoreIconButton from "components/common/ExpandMoreIconButton";
-// type
+
 interface AboutProps {}
 
 const ImageWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   position: "relative",
   width: "100%",
-  height: "auto", // 높이를 auto로 변경
-  aspectRatio: "16/9", // 원하는 비율로 설정 (예: 16:9)
+  height: "auto",
+  aspectRatio: "16/9",
 }));
 
 const CustomContainer = styled(Box)<BoxProps>(({ theme }) => ({
@@ -44,6 +39,8 @@ const CustomContainer = styled(Box)<BoxProps>(({ theme }) => ({
 const CustomCard = styled(Card)<CardProps>(({ theme }) => ({
   margin: "1rem",
   overflow: "hidden",
+  boxShadow: "none", // 그림자 제거
+  border: "none", // 테두리 제거
   [theme.breakpoints.up("sm")]: {
     margin: "2rem",
   },
@@ -77,15 +74,17 @@ const About: React.FunctionComponent<AboutProps> = (props) => {
 
   return (
     <CustomContainer id="about">
-      <CustomCard>
+      <CustomCard sx={{ boxShadow: "none", border: "none" }}>
+        {" "}
+        {/* sx 속성 추가 */}
         <ContainerGrid sx={{ marginTop: 0, height: "100%", width: "1000px" }}>
           <Grid item xs={12}>
             <ImageWrapper>
               <Image
                 alt="gothic image1"
-                layout="responsive" // 변경: responsive로 설정
-                width={16} // 원래 비율에 맞게 설정
-                height={9} // 원래 비율에 맞게 설정
+                layout="responsive"
+                width={16}
+                height={9}
                 objectFit="cover"
                 objectPosition="center center"
                 onLoad={() => setIsLoaded(true)}
@@ -106,16 +105,20 @@ const About: React.FunctionComponent<AboutProps> = (props) => {
           </Grid>
           <Grid item xs={12} sx={{ padding: "2rem" }}>
             <Card
-              sx={{ boxShadow: "none", height: "100%", position: "relative" }}
+              sx={{
+                boxShadow: "none",
+                border: "none",
+                height: "100%",
+                position: "relative",
+              }} // 내부 카드에도 적용
             >
               <CardContent>
                 <Box
                   sx={{
-                    width: "100%", // 부모의 너비에 맞춤
-                    textAlign: "center", // 글자 중앙 정렬
+                    width: "100%",
+                    textAlign: "center",
                   }}
                 >
-                  {/* 첫 번째 문장 */}
                   <Typography component="h2" variant="h5" fontWeight="bold">
                     사무실 관리 담당자 분들의
                   </Typography>
@@ -129,10 +132,8 @@ const About: React.FunctionComponent<AboutProps> = (props) => {
                     복잡하고 피곤한 인테리어 쉽게 풀어드립니다
                   </Typography>
 
-                  {/* 빈 줄 추가 */}
                   <Box sx={{ height: "1rem" }} />
 
-                  {/* 두 번째 문장 */}
                   <Typography component="h2" variant="h5" fontWeight="bold">
                     귀찮고 난감한 사무실 관리 해결해 드립니다
                   </Typography>

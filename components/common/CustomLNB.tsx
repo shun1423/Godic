@@ -11,7 +11,6 @@ import {
 import ConstantsContext from "context/constantsContext";
 import NameLogo from "./NameLogo";
 
-// Styled components for better readability
 const StyledListItem = styled(ListItem)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.action.hover,
@@ -24,14 +23,16 @@ const StyledListItem = styled(ListItem)(({ theme }) => ({
 const CustomDrawer = styled(Drawer)(({ theme }) => ({
   width: 240,
   flexShrink: 0,
-
   "& .MuiDrawer-paper": {
     width: 240,
     boxSizing: "border-box",
     border: "0px",
-    backgroundColor: theme.palette.background.default,
-    position: "relative", // 상대 위치로 변경
-    zIndex: 1, // 낮은 z-index 설정
+    backgroundColor: "transparent",
+    position: "fixed", // 화면에 고정
+    top: 0,
+    left: 0,
+    height: "100vh", // 화면 전체 높이를 차지하도록 설정
+    zIndex: 100, // 충분히 높은 z-index 설정
   },
 }));
 

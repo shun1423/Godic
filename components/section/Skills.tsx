@@ -8,6 +8,7 @@ import {
   GridProps,
   Typography,
   styled,
+  Box,
 } from "@mui/material";
 // custom component
 import ContainerGrid from "components/common/ContainerGrid";
@@ -18,12 +19,13 @@ import PhotoshopIcon from "components/icon/Photoshop";
 // context
 import ComponentsContext from "context/componentsContext";
 import { Construction, Hardware, Work } from "@mui/icons-material";
-// type
+
+// 기존 SkillsProps와 Example 컴포넌트 Props 설정
 interface SkillsProps {}
 
 const CustomContainer = styled(Container)<ContainerProps>(({ theme }) => ({
-  marginBottom: "5rem",
-  marginTop: "5rem",
+  marginBottom: "10rem", // 아래 여백을 더 넉넉히 추가
+  marginTop: "10rem", // 위 여백을 더 넉넉히 추가
   scrollMarginTop: "2rem",
 }));
 
@@ -32,7 +34,7 @@ const CustomGridItem = styled(Grid)<GridProps>(({ theme }) => ({
   display: "flex",
   flexDirection: "column",
   justifyContent: "center",
-  marginBottom: "2rem",
+  marginBottom: "3rem", // 항목 간 간격을 추가
   textAlign: "center",
 }));
 
@@ -60,48 +62,105 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
     },
   ];
 
+  const companyLogos = [
+    "함께한기업1.png",
+    "함께한기업2.png",
+    "함께한기업3.png",
+    "함께한기업4.png",
+    "함께한기업5.png",
+  ];
+
   return (
-    <CustomContainer id="skills" maxWidth={containerMaxWidth}>
-      <Typography
-        component="h2"
-        variant="h4"
-        textAlign="center"
-        fontWeight="800"
-      >
-        오피스 종합 솔루션
-      </Typography>
-      <ContainerGrid marginTop="2rem">
-        {skills.map((skill, index) => (
-          <CustomGridItem
-            item
-            key={`${skill.title} - ${index}`}
-            xs={12}
-            sm={6}
-            md={4}
-          >
-            {skill.Icon}
-            <Typography variant="h6" marginTop="1rem">
-              {skill.title}
-            </Typography>
-            <Typography variant="body1" marginTop="0.5rem">
-              {skill.description}
-            </Typography>
-            <Grid
-              container
-              spacing={1}
-              justifyContent="center"
-              marginTop="1rem"
+    <Box sx={{ py: 12, width: "100%" }}>
+      {" "}
+      {/* 전체 컴포넌트의 위아래 여백 */}
+      <CustomContainer id="skills" maxWidth={containerMaxWidth}>
+        <Typography
+          component="h2"
+          variant="h4"
+          textAlign="center"
+          fontWeight="800"
+          sx={{ marginBottom: "4rem" }} // 제목과 항목 간 여백
+        >
+          오피스 종합 솔루션
+        </Typography>
+        <ContainerGrid marginTop="3rem">
+          {skills.map((skill, index) => (
+            <CustomGridItem
+              item
+              key={`${skill.title} - ${index}`}
+              xs={12}
+              sm={6}
+              md={4}
             >
-              {skill.extraIcons.map((extraIcon, i) => (
-                <Grid item key={i}>
-                  {extraIcon}
-                </Grid>
-              ))}
+              {skill.Icon}
+              <Typography variant="h6" marginTop="1.5rem">
+                {skill.title}
+              </Typography>
+              <Typography variant="body1" marginTop="1rem">
+                {skill.description}
+              </Typography>
+              <Grid
+                container
+                spacing={2} // 아이콘 간의 여백을 넓힘
+                justifyContent="center"
+                marginTop="1.5rem"
+              >
+                {skill.extraIcons.map((extraIcon, i) => (
+                  <Grid item key={i}>
+                    {extraIcon}
+                  </Grid>
+                ))}
+              </Grid>
+            </CustomGridItem>
+          ))}
+        </ContainerGrid>
+      </CustomContainer>
+      {/* Example 컴포넌트 추가 */}
+      <Container
+        maxWidth="lg"
+        sx={{
+          marginTop: "8rem", // Skills와 Example 간의 간격을 넓힘
+          marginBottom: "8rem", // Example 아래 여백을 추가
+          padding: { xs: 3, md: 5 },
+        }}
+      >
+        <Typography
+          component="h2"
+          variant="h4"
+          fontWeight="bold"
+          textAlign="center"
+          gutterBottom
+        >
+          많은 기업들이 인정한 공간 혁신 솔루션
+        </Typography>
+        <Grid
+          container
+          spacing={4}
+          justifyContent="center"
+          sx={{
+            mt: 6,
+            gap: { xs: 3, sm: 4, lg: 5 },
+            maxWidth: { xs: "100%", sm: "600px", lg: "none" },
+            mx: "auto",
+          }}
+        >
+          {companyLogos.map((logo, index) => (
+            <Grid item xs={6} sm={4} md={2} key={index}>
+              <img
+                src={`/${logo}`}
+                alt={`Company logo ${index + 1}`}
+                style={{
+                  maxWidth: "100%",
+                  maxHeight: "48px",
+                  objectFit: "contain",
+                }}
+              />
             </Grid>
-          </CustomGridItem>
-        ))}
-      </ContainerGrid>
-    </CustomContainer>
+          ))}
+        </Grid>
+      </Container>
+    </Box>
   );
 };
 

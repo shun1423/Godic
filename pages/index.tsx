@@ -12,6 +12,7 @@ import ConstantsContext from "context/constantsContext";
 // type
 import type { NextPage } from "next";
 import AboutMid from "components/section/AboutMid";
+import Services from "components/section/Service";
 
 const Home: NextPage = () => {
   const { pages } = React.useContext(ConstantsContext);
@@ -24,7 +25,7 @@ const Home: NextPage = () => {
         <Skills />
         <AboutMid />
         <RecentProjects />
-        <HireMe />
+        <Services />
       </MainLayout>
     </>
   );

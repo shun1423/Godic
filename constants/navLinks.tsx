@@ -37,20 +37,11 @@ const navLinks: NavLink[] = [
   },
   {
     buttonProps: { color: "info", variant: "contained" },
-    href: "/projects",
+    href: "/#recentProjects",
     Icon: <WorkspacesIcon color="inherit" fontSize="inherit" />,
     label: "사무실 관리",
     order: 3,
     sidebarOrder: 1,
-    sidebarVisible: true,
-  },
-  {
-    buttonProps: { color: "info", variant: "outlined" },
-    href: "/hire-me",
-    Icon: <WorkIcon color="inherit" fontSize="inherit" />,
-    label: "상담 문의",
-    order: 4,
-    sidebarOrder: 3,
     sidebarVisible: true,
   },
 ];

@@ -51,7 +51,7 @@ const HireMe: NextPage = (props) => {
                 상담문의
               </Typography>
               <Typography component="p" variant="body1">
-                Tel: 02-3665-5735 | Email: designpiet@naver.com
+                Tel: 031-758-1333 | Email: gothic1333@naver.com
               </Typography>
               <Typography
                 component="p"

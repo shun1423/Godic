@@ -9,7 +9,7 @@ const lightTheme = createTheme({
   palette: {
     mode: "light",
     primary: {
-      main: "#FF6347",
+      main: "#C8A235",
       light: "#FF826B",
       dark: "#B24531",
       contrastText: "#FFFFFF",
@@ -35,6 +35,9 @@ const lightTheme = createTheme({
       secondary: "#383838",
       disabled: "#777777",
     },
+  },
+  typography: {
+    fontFamily: "'Pretendard', sans-serif", // Pretendard 폰트 적용
   },
   components: {
     MuiCard: {

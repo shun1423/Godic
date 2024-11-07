@@ -1,3 +1,13 @@
 html {
   scroll-behavior: smooth;
 }
+
+html,
+body,
+#__next {
+  width: 100%; /* 혹은 필요한 값으로 수정 */
+  min-width: fit-content;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
