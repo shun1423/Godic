@@ -15,6 +15,19 @@ import {
 } from "@mui/material";
 import { ContactFormSchema } from "models/contactFormModel";
 
+interface ContactFormValues {
+  paths: string[];
+  companyName: string;
+  name: string;
+  phone: string;
+  location: string;
+  subLocation: string; // 추가
+  area: string;
+  startDate: string;
+  budget: string;
+  description: string;
+  images: string[];
+}
 // 대한민국 시와 서울 구 리스트
 const locationOptions = {
   서울: [
@@ -160,7 +173,7 @@ const ContactForm: React.FunctionComponent = () => {
         상담 신청 폼
       </Typography>
 
-      <Formik
+      <Formik<ContactFormValues>
         initialValues={{
           paths: [],
           companyName: "",
