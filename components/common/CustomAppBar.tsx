@@ -1,8 +1,5 @@
-// react
 import * as React from "react";
-// next
 import { useRouter } from "next/router";
-// @mui
 import {
   AppBar,
   AppBarProps,
@@ -20,14 +17,14 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
-// custom component
+import { Theme } from "@mui/material/styles"; // Theme 타입 추가
 import NameLogo from "components/common/NameLogo";
 import ButtonLink from "components/common/ButtonLink";
 import MenuToggler from "components/common/MenuToggler";
 import ConstantsContext from "context/constantsContext";
 import useOnClickOutside from "hooks/useOnClickOutside";
 import ComponentsContext from "context/componentsContext";
-// type
+
 interface CustomAppBarProps {}
 
 const CustomAppBarRoot = styled(AppBar)<AppBarProps>(({ theme }) => ({
@@ -54,6 +51,7 @@ const CustomToolbar = styled(Toolbar)<ToolbarProps>(({ theme }) => ({
     padding: 0,
   },
 }));
+
 const CustomAppBar: React.FunctionComponent<CustomAppBarProps> = (props) => {
   const [dropdownState, setDropdownState] = React.useState(false);
   const { containerMaxWidth = "lg" } = React.useContext(ComponentsContext);
@@ -73,11 +71,9 @@ const CustomAppBar: React.FunctionComponent<CustomAppBarProps> = (props) => {
     router.push(href);
   };
 
-  const {
-    palette: { background },
-  } = useTheme();
-
-  const isLargeScreen = useMediaQuery((theme) => theme.breakpoints.up("sm"));
+  // useTheme에 Theme 타입 적용
+  const theme = useTheme<Theme>();
+  const isLargeScreen = useMediaQuery(theme.breakpoints.up("sm"));
 
   return (
     <>
@@ -90,10 +86,7 @@ const CustomAppBar: React.FunctionComponent<CustomAppBarProps> = (props) => {
             {isLargeScreen ? null : (
               <LinksBox>
                 {navLinks
-                  ?.filter((navLink) => {
-                    // 큰 화면에서는 표시하지 않도록 필터링
-                    return !isLargeScreen;
-                  })
+                  ?.filter((navLink) => !isLargeScreen)
                   .map((navLink, index) => (
                     <ButtonLink
                       key={navLink.label + index + navLink.href}
@@ -116,7 +109,7 @@ const CustomAppBar: React.FunctionComponent<CustomAppBarProps> = (props) => {
       </Container>
       <Box
         sx={{
-          backgroundColor: background.default,
+          backgroundColor: theme.palette.background.default,
           margin: 0,
           transition: "box-shadow 0.3s ease-in-out",
           boxShadow: dropdownState ? "0px 6px 4px 0px rgba(0,0,0,0.12)" : "",

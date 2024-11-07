@@ -134,7 +134,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
           </Grid>
           <Grid item xs={12} sx={{ padding: { xs: "1.5rem", md: "2rem" } }}>
             <Box>
-              <Collapse in={showMore} timeout="auto" unmountOnExit keepMounted>
+              <Collapse in={showMore} timeout="auto" unmountOnExit>
                 <Box
                   sx={{
                     display: "flex",

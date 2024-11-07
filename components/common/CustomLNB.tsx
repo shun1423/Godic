@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import {
   Drawer,
   List,
-  ListItem,
+  ListItemButton,
   ListItemIcon,
   ListItemText,
   styled,
@@ -11,7 +11,7 @@ import {
 import ConstantsContext from "context/constantsContext";
 import NameLogo from "./NameLogo";
 
-const StyledListItem = styled(ListItem)(({ theme }) => ({
+const StyledListItem = styled(ListItemButton)(({ theme }) => ({
   "&:hover": {
     backgroundColor: theme.palette.action.hover,
     color: theme.palette.primary.main,
@@ -28,11 +28,11 @@ const CustomDrawer = styled(Drawer)(({ theme }) => ({
     boxSizing: "border-box",
     border: "0px",
     backgroundColor: "transparent",
-    position: "fixed", // 화면에 고정
+    position: "fixed",
     top: 0,
     left: 0,
-    height: "100vh", // 화면 전체 높이를 차지하도록 설정
-    zIndex: 100, // 충분히 높은 z-index 설정
+    height: "100vh",
+    zIndex: 100,
   },
 }));
 
@@ -59,7 +59,6 @@ const CustomLNB: React.FC = () => {
           <StyledListItem
             key={navLink.label + index}
             onClick={() => handleNavClick(navLink.href)}
-            button
           >
             <ListItemIcon>{navLink.Icon}</ListItemIcon>
             <ListItemText primary={navLink.label} />

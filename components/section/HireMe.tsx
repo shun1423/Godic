@@ -56,14 +56,6 @@ const HireMe: React.FunctionComponent<HireMeProps> = (props) => {
           order={{ xs: 1, md: 2 }}
           sx={{ position: "relative" }}
         >
-          <Image
-            alt="A freelancer vector"
-            height={600}
-            loading="lazy"
-            onLoad={() => setIsLoaded(true)}
-            src="/sections/freelancer-male.svg"
-            width={600}
-          />
           {!isLoaded && (
             <Skeleton
               variant="rectangular"
