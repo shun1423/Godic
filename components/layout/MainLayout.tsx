@@ -89,7 +89,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
         <Box
           sx={{
             flexGrow: 1,
-            maxWidth: "1200px",
+            maxWidth: "1000px",
 
             mx: "auto",
             paddingBottom: { xs: "16px", md: "24px" },
