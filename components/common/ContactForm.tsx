@@ -232,7 +232,7 @@ const ContactForm: React.FunctionComponent = () => {
               <InputLabel>지역</InputLabel>
               <Select
                 name="location"
-                value={values.location}
+                value={values.location === "서울" ? values.subLocation : ""}
                 onChange={(e) => {
                   const city = e.target.value as string;
                   setFieldValue("location", city);
@@ -240,7 +240,11 @@ const ContactForm: React.FunctionComponent = () => {
                   setFieldValue("subLocation", ""); // subLocation 초기화
                 }}
                 onBlur={handleBlur}
-                error={touched.location && Boolean(errors.location)}
+                error={
+                  values.location === "서울" &&
+                  touched.subLocation &&
+                  Boolean(errors.subLocation)
+                }
               >
                 {Object.keys(locationOptions).map((city) => (
                   <MenuItem key={city} value={city}>
@@ -256,14 +260,18 @@ const ContactForm: React.FunctionComponent = () => {
                 <InputLabel>구</InputLabel>
                 <Select
                   name="subLocation"
-                  value={values.subLocation}
+                  value={values.location === "서울" ? values.subLocation : ""}
                   onChange={(e) => {
                     const subLocation = e.target.value as string;
                     setFieldValue("subLocation", subLocation);
                     setSubLocation(subLocation);
                   }}
                   onBlur={handleBlur}
-                  error={touched.subLocation && Boolean(errors.subLocation)}
+                  error={
+                    values.location === "서울" &&
+                    touched.subLocation &&
+                    Boolean(errors.subLocation)
+                  }
                 >
                   {locationOptions["서울"].map((district) => (
                     <MenuItem key={district} value={district}>
