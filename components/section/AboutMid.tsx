@@ -18,7 +18,7 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
   position: "relative",
   width: "100%",
   height: 0,
-  paddingTop: "56.25%", // 16:9 비율 유지
+  paddingTop: "56.25%",
   overflow: "hidden",
   borderRadius: "12px",
 }));
@@ -26,10 +26,10 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
 const CustomContainer = styled(Box)(({ theme }) => ({
   scrollMarginTop: "1rem",
   [theme.breakpoints.up("sm")]: { scrollMarginTop: "2rem" },
-  marginBottom: "6rem", // 섹션 간 여백 추가
-  paddingTop: theme.spacing(12), // 상단 여백 추가
+  marginBottom: "6rem",
+  paddingTop: theme.spacing(12),
   [theme.breakpoints.up("md")]: {
-    paddingTop: theme.spacing(16), // 중간 화면 이상에서 상단 여백 추가
+    paddingTop: theme.spacing(16),
   },
 }));
 
@@ -92,21 +92,47 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
     <Box sx={{ backgroundColor: "#F4F4F4" }}>
       <CustomContainer id="about">
         <Container maxWidth="md">
-          <Typography
-            component="h1"
-            variant="h3"
-            fontWeight="600"
-            textAlign="center"
-            sx={{
-              color: "#333",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
-              marginBottom: { xs: "1.5rem", md: "2.5rem" },
-              fontSize: { xs: "1.8rem", md: "2.5rem" },
-            }}
-          >
-            Office Interior
-          </Typography>
+          <Box sx={{ textAlign: "center", mb: { xs: 6, md: 10 } }}>
+            <Typography
+              component="span"
+              sx={{
+                color: "primary.main",
+                fontSize: "1.1rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                display: "block",
+                marginBottom: 2,
+              }}
+            >
+              Our Expertise
+            </Typography>
+            <Typography
+              component="h1"
+              variant="h2"
+              fontWeight="800"
+              sx={{
+                color: "#1a1a1a",
+                letterSpacing: "0.02em",
+                marginBottom: { xs: 3, md: 4 },
+                fontSize: { xs: "2.5rem", md: "3.5rem" },
+              }}
+            >
+              Office Interior
+            </Typography>
+            <Typography
+              variant="h6"
+              color="text.secondary"
+              sx={{
+                maxWidth: "600px",
+                margin: "0 auto",
+                lineHeight: 1.8,
+              }}
+            >
+              혁신적인 디자인과 실용성의 완벽한 조화를 통해 최적의 업무 환경을
+              제공합니다
+            </Typography>
+          </Box>
         </Container>
         <Container maxWidth="lg">
           <Grid item xs={12} sx={{ paddingBottom: 10 }}>
@@ -158,7 +184,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
                     다양한 제안
                   </Typography>
                   <Typography
-                    fontWeight="bold" // 굵은 텍스트 설정
+                    fontWeight="bold"
                     sx={{
                       width: { xs: "100%", md: "70%" },
                       textAlign: "left",
@@ -194,7 +220,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
                     가성비
                   </Typography>
                   <Typography
-                    fontWeight="bold" // 굵은 텍스트 설정
+                    fontWeight="bold"
                     sx={{
                       width: { xs: "100%", md: "70%" },
                       textAlign: "left",
@@ -213,7 +239,6 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
         </Container>
       </CustomContainer>
 
-      {/* 나머지 섹션들 */}
       {renderSection(
         "/Godic7.jpeg",
         <>

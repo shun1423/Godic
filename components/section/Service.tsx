@@ -4,11 +4,14 @@ import {
   Grid,
   Typography,
   styled,
-  Divider,
+  Container,
+  Paper,
   List,
   ListItem,
   ListItemText,
+  ListItemIcon,
 } from "@mui/material";
+import { Check } from "@mui/icons-material";
 
 interface ManagementSectionProps {
   title: string;
@@ -17,69 +20,31 @@ interface ManagementSectionProps {
 }
 
 const SectionContainer = styled(Box)(({ theme }) => ({
-  padding: theme.spacing(6, 4), // 좌우 패딩을 추가하여 공간 확보
-  backgroundColor: "#f9f9f9",
-  marginBottom: theme.spacing(8),
-  width: "100%",
+  padding: theme.spacing(12, 0),
+  backgroundColor: "#ffffff",
+  position: "relative",
 }));
 
-const ManagementSection: React.FC<ManagementSectionProps> = ({
-  title,
-  subtitle,
-  items,
-}) => (
-  <SectionContainer>
-    <Box sx={{ maxWidth: "100%", width: "100%" }}>
-      {" "}
-      {/* 전체 너비로 설정 */}
-      <Typography
-        variant="h4"
-        component="h2"
-        fontWeight="bold"
-        gutterBottom
-        textAlign="center"
-      >
-        {title}
-      </Typography>
-      <Typography
-        variant="h6"
-        component="h3"
-        fontWeight="medium"
-        color="text.secondary"
-        textAlign="center"
-        gutterBottom
-      >
-        {subtitle}
-      </Typography>
-      <Grid container spacing={4} sx={{ marginTop: 4 }}>
-        {items.map((item, index) => (
-          <Grid item xs={12} key={index}>
-            {/* 모든 아이템을 화면 너비 전체로 확장 */}
-            <Typography variant="h6" fontWeight="bold">
-              {item.title}
-            </Typography>
-            {Array.isArray(item.description) ? (
-              <List>
-                {item.description.map((desc, idx) => (
-                  <ListItem key={idx} disableGutters>
-                    <ListItemText primary={`- ${desc}`} />
-                  </ListItem>
-                ))}
-              </List>
-            ) : (
-              <Typography variant="body2" color="text.secondary" marginTop={1}>
-                {item.description}
-              </Typography>
-            )}
-          </Grid>
-        ))}
-      </Grid>
-    </Box>
-  </SectionContainer>
-);
+const ServiceCard = styled(Paper)(({ theme }) => ({
+  padding: theme.spacing(4, 5),
+  height: "100%",
+  backgroundColor: "#ffffff",
+  borderRadius: theme.spacing(1),
+  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+  "&:hover": {
+    transform: "translateY(-8px)",
+    boxShadow: "0 10px 40px rgba(0,0,0,0.08)",
+  },
+}));
 
-const Services: React.FC = () => {
-  const officeManagementItems = [
+const ListItemStyled = styled(ListItem)(({ theme }) => ({
+  paddingLeft: 0,
+  paddingRight: 0,
+  marginBottom: theme.spacing(1),
+}));
+
+const ServicesSection: React.FC = () => {
+  const serviceItems = [
     {
       title: "사무용 가구",
       description: [
@@ -94,18 +59,15 @@ const Services: React.FC = () => {
         "인사 이동으로 인한 레이아웃 변경 시 평면도 제공",
       ],
     },
-  ];
-
-  const facilityManagementItems = [
     {
-      title: "시설 유지관리 (상황에 따라 요금 발생)",
+      title: "시설 유지관리",
       description: [
-        "조명, 콘센트, 도어, 가구, 벽면 찍힘 등",
-        "네트워크 공사 및 점검",
+        "조명, 콘센트, 도어, 가구, 벽면 찍힘 등 신속한 대응",
+        "네트워크 공사 및 점검 서비스 제공",
       ],
     },
     {
-      title: "전문 청소 (월 요금 별도)",
+      title: "전문 청소 서비스",
       description: [
         "년 2회 P타일(데코타일) 기계청소 및 왁스 작업",
         "월 1회 정기적으로 카펫 기계 청소",
@@ -116,24 +78,92 @@ const Services: React.FC = () => {
   ];
 
   return (
-    <Box>
-      {/* Office Management Section */}
-      <ManagementSection
-        title="Office Management"
-        subtitle="효율적인 사무 공간을 위한 맞춤 솔루션"
-        items={officeManagementItems}
-      />
+    <SectionContainer>
+      <Container maxWidth="lg">
+        <Box sx={{ textAlign: "center", mb: 8 }}>
+          <Typography
+            component="span"
+            sx={{
+              color: "primary.main",
+              fontSize: "1rem",
+              fontWeight: 600,
+              letterSpacing: "0.1em",
+              textTransform: "uppercase",
+              display: "block",
+              marginBottom: 2,
+            }}
+          >
+            Our Services
+          </Typography>
+          <Typography
+            variant="h3"
+            component="h2"
+            sx={{
+              fontWeight: 700,
+              marginBottom: 3,
+              fontSize: { xs: "2rem", md: "2.5rem" },
+              color: "#1a1a1a",
+              maxWidth: "800px",
+              margin: "0 auto 24px",
+            }}
+          >
+            TOTAL OFFICE MANAGEMENT
+          </Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              color: "#666",
+              maxWidth: "600px",
+              margin: "0 auto",
+              fontSize: { xs: "1rem", md: "1.1rem" },
+              lineHeight: 1.8,
+            }}
+          >
+            사무용 가구부터 시설관리까지 원스톱 서비스를 제공합니다
+          </Typography>
+        </Box>
 
-      <Divider variant="middle" />
-
-      {/* Facility Management Section */}
-      <ManagementSection
-        title="Facility Management"
-        subtitle="전문적인 시설 유지 및 청소 서비스"
-        items={facilityManagementItems}
-      />
-    </Box>
+        <Grid container spacing={4}>
+          {serviceItems.map((item, index) => (
+            <Grid item xs={12} md={6} key={index}>
+              <ServiceCard elevation={0}>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: 700,
+                    marginBottom: 3,
+                    color: "#1a1a1a",
+                    fontSize: { xs: "1.25rem", md: "1.4rem" },
+                  }}
+                >
+                  {item.title}
+                </Typography>
+                <List disablePadding>
+                  {item.description.map((desc, idx) => (
+                    <ListItemStyled key={idx}>
+                      <ListItemIcon sx={{ minWidth: 36 }}>
+                        <Check sx={{ color: "primary.main" }} />
+                      </ListItemIcon>
+                      <ListItemText
+                        primary={desc}
+                        primaryTypographyProps={{
+                          sx: {
+                            fontSize: "1rem",
+                            color: "#666",
+                            lineHeight: 1.6,
+                          },
+                        }}
+                      />
+                    </ListItemStyled>
+                  ))}
+                </List>
+              </ServiceCard>
+            </Grid>
+          ))}
+        </Grid>
+      </Container>
+    </SectionContainer>
   );
 };
 
-export default Services;
+export default ServicesSection;

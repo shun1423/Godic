@@ -10,7 +10,6 @@ interface RecentProjectsProps {}
 
 const CustomWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   margin: "6rem 1rem",
-
   overflow: "hidden",
   [theme.breakpoints.up("sm")]: {
     margin: "6rem 2rem",
@@ -20,12 +19,21 @@ const CustomWrapper = styled(Box)<BoxProps>(({ theme }) => ({
 const BannerWrapper = styled(Box)<BoxProps>(({ theme }) => ({
   textAlign: "center",
   marginBottom: "2rem",
-  padding: "2rem 1rem",
-  background: "linear-gradient(135deg, #ECEBE2 0%, #ECEBE2 100%)",
-  color: "#333",
-  borderRadius: "8px",
+  padding: theme.spacing(6, 2),
+  background: "#ffffff",
+  position: "relative",
+  "&::after": {
+    content: '""',
+    position: "absolute",
+    bottom: 0,
+    left: "50%",
+    transform: "translateX(-50%)",
+    width: "60px",
+    height: "3px",
+    backgroundColor: theme.palette.primary.main,
+  },
   [theme.breakpoints.up("sm")]: {
-    padding: "3rem",
+    padding: theme.spacing(8, 3),
   },
 }));
 
@@ -39,17 +47,58 @@ const RecentProjects: React.FunctionComponent<RecentProjectsProps> = () => {
   return (
     <CustomWrapper id="recentProjects">
       <BannerWrapper>
-        <Typography variant="h4" sx={{ marginBottom: "1rem" }}>
+        <Typography
+          component="span"
+          sx={{
+            color: "primary.main",
+            fontSize: "1.1rem",
+            fontWeight: 600,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            display: "block",
+            marginBottom: 2,
+          }}
+        >
+          Office Management Service
+        </Typography>
+        <Typography
+          variant="h3"
+          sx={{
+            marginBottom: "1.5rem",
+            color: "#1a1a1a",
+            fontWeight: 800,
+            letterSpacing: "-0.02em",
+            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+          }}
+        >
           번거롭고 애매모호한 사무실 관리 힘드셨죠?
         </Typography>
-        <Typography variant="h5" sx={{ marginBottom: "0.5rem" }}>
-          쉽고 편하게 만들어 드립니다.
+        <Typography
+          variant="h5"
+          sx={{
+            marginBottom: "1rem",
+            color: "#333",
+            fontWeight: 600,
+            fontSize: { xs: "1.2rem", sm: "1.5rem" },
+          }}
+        >
+          쉽고 편하게 만들어 드립니다
         </Typography>
-        <Typography variant="h6">
-          복잡한 공사부터 사소한 관리까지 한번에 가능합니다.
+        <Typography
+          variant="body1"
+          sx={{
+            color: "#666",
+            maxWidth: "600px",
+            margin: "0 auto",
+            fontSize: { xs: "1rem", sm: "1.1rem" },
+            lineHeight: 1.8,
+          }}
+        >
+          복잡한 공사부터 사소한 관리까지 한번에 가능합니다
         </Typography>
       </BannerWrapper>
 
+      {/* 기존 Swiper 부분 유지 */}
       <Swiper
         modules={[Autoplay]}
         autoplay={{ delay: 3000, disableOnInteraction: false }}
@@ -74,9 +123,8 @@ const RecentProjects: React.FunctionComponent<RecentProjectsProps> = () => {
               src={`/유지관리_${index}.jpeg`}
               alt={`유지관리 ${index}`}
               style={{
-                width: "80%", // 이미지 크기를 조정하여 슬라이드 중앙에 배치
+                width: "80%",
                 height: "auto",
-
                 objectFit: "cover",
                 borderRadius: "8px",
                 boxShadow: "0 2px 6px rgba(0, 0, 0, 0.1)",
