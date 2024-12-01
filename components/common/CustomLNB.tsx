@@ -26,19 +26,17 @@ const StyledListItem = styled(ListItemButton)(({ theme }) => ({
 const LogoContainer = styled(Box)({
   display: "flex",
   alignItems: "center",
-  gap: "10px",
+  padding: "16px 0",
   width: "240px",
+  height: "80px",
 });
 
 const ImageWrapper = styled(Box)({
-  paddingLeft: "20px",
-  width: "120px",
+  paddingLeft: "16px",
+  width: "80px", // 120px에서 80px로 축소
+  height: "100%",
   display: "flex",
   alignItems: "center",
-});
-
-const StyledImage = styled(Image)({
-  borderRadius: "6px",
 });
 
 const CustomDrawer = styled(Drawer)(({ theme }) => ({
@@ -74,10 +72,11 @@ const CustomLNB: React.FC = () => {
           <Image
             src="/회사로고.jpeg"
             alt="Company Logo"
-            width={120}
-            height={84}
+            width={80} // 120px에서 80px로 축소
+            height={35} // 비율 유지를 위해 조정
             style={{
               objectFit: "contain",
+              maxHeight: "100%",
             }}
           />
         </ImageWrapper>

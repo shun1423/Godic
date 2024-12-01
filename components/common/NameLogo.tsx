@@ -30,20 +30,20 @@ const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
         justifyContent: "flex-start",
         position: "relative",
         width: "auto",
-        height: "70px",
-        padding: "0px",
+        height: "60px",
+        padding: "0px 8px",
       }}
     >
       <p
         style={{
           color: "#2C3E50",
-          padding: "5px 10px",
-          fontSize: "38px",
+          padding: "4px 8px",
+          fontSize: "28px",
           fontWeight: "800",
           position: "relative",
           textTransform: "uppercase",
           whiteSpace: "nowrap",
-          letterSpacing: "2px",
+          letterSpacing: "1.5px",
           margin: 0,
           fontFamily: "'Montserrat', sans-serif",
           background: "linear-gradient(135deg, #2C3E50 0%, #3498DB 100%)",
