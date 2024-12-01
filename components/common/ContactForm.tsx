@@ -1,5 +1,6 @@
 import * as React from "react";
 import { Formik, Field } from "formik";
+import emailjs from "@emailjs/browser";
 import {
   Box,
   Typography,
@@ -12,8 +13,14 @@ import {
   InputLabel,
   Button,
   TextField,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { ContactFormSchema } from "models/contactFormModel";
+
+const EMAIL_SERVICE_ID = "service_m0os7ra"; // EmailJS Service ID
+const EMAIL_TEMPLATE_ID = "template_p46slsn"; // EmailJS Template ID
+const EMAIL_PUBLIC_KEY = "R-8KYhXEh8S6y5KRw"; // EmailJS Public Key
 
 interface ContactFormValues {
   paths: string[];
@@ -155,8 +162,50 @@ const locationOptions = {
 
 const ContactForm: React.FunctionComponent = () => {
   const [selectedCity, setSelectedCity] = React.useState<string>("");
-  const [subLocation, setSubLocation] = React.useState<string>("");
+  const [snackbar, setSnackbar] = React.useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "error";
+  }>({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
+  const handleCloseSnackbar = () => {
+    setSnackbar({ ...snackbar, open: false });
+  };
+
+  const handleEmailSend = async (values: ContactFormValues) => {
+    try {
+      const templateParams = {
+        ...values,
+        location: `${values.location} ${values.subLocation}`.trim(),
+      };
+
+      const response = await emailjs.send(
+        EMAIL_SERVICE_ID,
+        EMAIL_TEMPLATE_ID,
+        templateParams,
+        EMAIL_PUBLIC_KEY
+      );
+
+      if (response.status === 200) {
+        setSnackbar({
+          open: true,
+          message: "상담 신청이 성공적으로 전송되었습니다!",
+          severity: "success",
+        });
+      }
+    } catch (error) {
+      console.error("이메일 전송 실패:", error); // 이미 있음
+      setSnackbar({
+        open: true,
+        message: "전송 중 오류가 발생했습니다. 다시 시도해주세요.",
+        severity: "error",
+      });
+    }
+  };
   return (
     <Box
       sx={{
@@ -187,7 +236,14 @@ const ContactForm: React.FunctionComponent = () => {
           description: "",
           images: [],
         }}
-        onSubmit={(values) => console.log(values)}
+        onSubmit={async (values, { resetForm }) => {
+          try {
+            await handleEmailSend(values);
+            resetForm();
+          } catch (error) {
+            console.error("Submit Error:", error);
+          }
+        }}
         validationSchema={ContactFormSchema}
       >
         {({
@@ -200,7 +256,14 @@ const ContactForm: React.FunctionComponent = () => {
           handleSubmit,
           handleReset,
         }) => (
-          <form onSubmit={handleSubmit} noValidate>
+          <form
+            onSubmit={(e) => {
+              e.preventDefault(); // 추가
+
+              handleSubmit(e);
+            }}
+            noValidate
+          >
             {/* 기업명 */}
             <TextField
               fullWidth
@@ -345,6 +408,22 @@ const ContactForm: React.FunctionComponent = () => {
           </form>
         )}
       </Formik>
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+        sx={{ zIndex: 9999 }} // 추가
+      >
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
