@@ -1,8 +1,6 @@
-// react
 import * as React from "react";
-// csstype
 import { Property } from "csstype";
-// type
+
 interface NameLogoProps {
   bgBorder?: Property.BorderRadius;
   bgColor?: Property.BackgroundColor;
@@ -29,32 +27,30 @@ const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
         cursor: "pointer",
         display: "flex",
         flexDirection: "row",
-        justifyContent: "center",
+        justifyContent: "flex-start",
         position: "relative",
-        width: "fit-content",
+        width: "auto",
         height: "70px",
-        padding: "10px",
+        padding: "0px",
       }}
     >
-      <div
-        style={{
-          alignItems: "center",
-          backgroundColor: bgColor,
-          borderRadius: bgBorder,
-          display: "flex",
-          height: 30,
-          width: 30,
-        }}
-      />
       <p
         style={{
-          color,
-          padding: "10px",
-          fontSize: "40px",
-          fontWeight: "bold",
+          color: "#2C3E50",
+          padding: "5px 10px",
+          fontSize: "38px",
+          fontWeight: "800",
           position: "relative",
-          textTransform: "capitalize",
+          textTransform: "uppercase",
           whiteSpace: "nowrap",
+          letterSpacing: "2px",
+          margin: 0,
+          fontFamily: "'Montserrat', sans-serif",
+          background: "linear-gradient(135deg, #2C3E50 0%, #3498DB 100%)",
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          textShadow: "1px 1px 1px rgba(0,0,0,0.1)",
+          transition: "all 0.3s ease",
         }}
       >
         {name}

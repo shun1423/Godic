@@ -52,12 +52,16 @@ const Footer: React.FunctionComponent = () => {
         {/* 회사 정보 */}
         <CompanyInfo>
           <Typography variant="body2">고딕이엔씨 주식회사</Typography>
+
           <Typography variant="body2">
-            대표이사: 최연선 | 사업자번호: 382-81-02781
+            주소: 경기도 성남시 중원구 양헌로 411 시티오피스타워 909호
           </Typography>
           <Typography variant="body2">
-            주소: 경기도 성남시 중원구 양헌로 411 시티오피스타워 909호 | 번호:
-            031-758-1333
+            사업자번호: 382-81-02781 | 건설업 면허번호: 성남-22-나-10 |
+            옥외광고사업 | 여성기업
+          </Typography>
+          <Typography variant="body2">
+            번호: 010-8640-1007 , 010-5421-6472
           </Typography>
         </CompanyInfo>
 

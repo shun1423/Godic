@@ -51,7 +51,17 @@ const HireMe: NextPage = (props) => {
                 상담문의
               </Typography>
               <Typography component="p" variant="body1">
-                Tel: 031-758-1333 | Email: gothic1333@naver.com
+                신규희 실장 : 010-8640-1007
+              </Typography>
+              <Typography component="p" variant="body1">
+                박민수 팀장 : 010-5421-6472
+              </Typography>
+              <Typography
+                component="p"
+                variant="body1"
+                sx={{ marginTop: "1rem" }}
+              >
+                Email: gothic1333@naver.com
               </Typography>
               <Typography
                 component="p"

@@ -1,5 +1,6 @@
 import * as React from "react";
 import { useRouter } from "next/router";
+import Image from "next/image";
 import {
   Drawer,
   List,
@@ -7,6 +8,7 @@ import {
   ListItemIcon,
   ListItemText,
   styled,
+  Box,
 } from "@mui/material";
 import ConstantsContext from "context/constantsContext";
 import NameLogo from "./NameLogo";
@@ -18,7 +20,26 @@ const StyledListItem = styled(ListItemButton)(({ theme }) => ({
   },
   color: theme.palette.text.primary,
   backgroundColor: "transparent",
+  padding: "10px",
 }));
+
+const LogoContainer = styled(Box)({
+  display: "flex",
+  alignItems: "center",
+  gap: "10px",
+  width: "240px",
+});
+
+const ImageWrapper = styled(Box)({
+  paddingLeft: "20px",
+  width: "120px",
+  display: "flex",
+  alignItems: "center",
+});
+
+const StyledImage = styled(Image)({
+  borderRadius: "6px",
+});
 
 const CustomDrawer = styled(Drawer)(({ theme }) => ({
   width: 240,
@@ -48,20 +69,32 @@ const CustomLNB: React.FC = () => {
 
   return (
     <CustomDrawer variant="permanent" anchor="left">
-      <NameLogo
-        bgColor="white"
-        color="#383838"
-        name="GothiC"
-        onClick={() => router.push("/")}
-      />
+      <LogoContainer>
+        <ImageWrapper>
+          <Image
+            src="/회사로고.jpeg"
+            alt="Company Logo"
+            width={120}
+            height={84}
+            style={{
+              objectFit: "contain",
+            }}
+          />
+        </ImageWrapper>
+        <NameLogo
+          bgColor="white"
+          color="#383838"
+          name="GothiC"
+          onClick={() => router.push("/")}
+        />
+      </LogoContainer>
       <List>
         {sortedNavLinks?.map((navLink, index) => (
           <StyledListItem
             key={navLink.label + index}
             onClick={() => handleNavClick(navLink.href)}
           >
-            <ListItemIcon>{navLink.Icon}</ListItemIcon>
-            <ListItemText primary={navLink.label} />
+            <ListItemText primary={navLink.label} sx={{ marginLeft: "20px" }} />
           </StyledListItem>
         ))}
       </List>

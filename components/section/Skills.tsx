@@ -39,6 +39,8 @@ const ServiceCard = styled(Paper)(({ theme }) => ({
   transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
   cursor: "pointer",
   backgroundColor: "#ffffff",
+  maxWidth: "400px", // 이 부분만 추가
+  margin: "0 auto", // 이 부분만 추가
   "&:hover": {
     transform: "translateY(-8px)",
     boxShadow: theme.shadows[8],
@@ -79,12 +81,15 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
   const skills = [
     {
       Icon: <Hardware fontSize="large" sx={{ color: "#000000" }} />,
-      title: "인테리어 솔루션",
-      description: "최신 트렌드와 기업의 아이덴티티를 반영한 맞춤형 공간 설계",
+      title: "공사",
+      description:
+        "인테리어, 간판, 집기 설치부터 네트워크까지 통합 구축 서비스",
       features: [
-        "공간 컨설팅 및 설계",
-        "친환경 자재 시공",
-        "스마트 오피스 구축",
+        "인테리어",
+        "옥외간판 설치",
+        "냉낭반기 설치",
+        "사무용가구 납품 및 설치",
+        "네트워크 공사",
       ],
       extraIcons: [
         <StyledIcon key="1">
@@ -97,12 +102,13 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
     },
     {
       Icon: <Work fontSize="large" sx={{ color: "#000000" }} />,
-      title: "사무관리 시스템",
-      description: "효율적인 업무환경 구축을 위한 토탈 오피스 솔루션 제공",
+      title: "관리",
+      description: "청소, 이사, 유지보수 등 사무실 종합 관리 서비스",
       features: [
-        "스마트 가구 시스템",
-        "업무 효율화 컨설팅",
-        "친환경 사무환경 구축",
+        "전문청소",
+        "기업이사",
+        "유지보수",
+        "레이아웃 변경 (자리이동)",
       ],
       extraIcons: [
         <StyledIcon key="1">
@@ -110,20 +116,6 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
         </StyledIcon>,
         <StyledIcon key="2">
           <Briefcase />
-        </StyledIcon>,
-      ],
-    },
-    {
-      Icon: <Construction fontSize="large" sx={{ color: "#000000" }} />,
-      title: "시설관리 서비스",
-      description: "24/7 신속 대응 시스템으로 완벽한 시설관리 서비스 제공",
-      features: ["실시간 모니터링", "정기 안전점검", "에너지 효율 관리"],
-      extraIcons: [
-        <StyledIcon key="1">
-          <Wrench />
-        </StyledIcon>,
-        <StyledIcon key="2">
-          <Settings />
         </StyledIcon>,
       ],
     },
@@ -135,6 +127,8 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
     "함께한기업3.png",
     "함께한기업4.png",
     "함께한기업5.png",
+    "함께한기업6.png",
+    "함께한기업7.png",
   ];
 
   return (
@@ -174,8 +168,7 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
               item
               key={`${skill.title} - ${index}`}
               xs={12}
-              sm={6}
-              md={4}
+              md={6} // sm={6}, md={4} 에서 변경
             >
               <ServiceCard elevation={2}>
                 <Box sx={{ mb: 3 }}>{skill.Icon}</Box>
