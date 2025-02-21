@@ -41,7 +41,6 @@ const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
           fontSize: "28px",
           fontWeight: "800",
           position: "relative",
-          textTransform: "uppercase",
           whiteSpace: "nowrap",
           letterSpacing: "1.5px",
           margin: 0,

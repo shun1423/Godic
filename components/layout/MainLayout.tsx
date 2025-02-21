@@ -15,6 +15,10 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
   const router = useRouter();
 
+  // Calculate the ratios for the layout
+  const sideWidth = "20%";
+  const contentWidth = "60%";
+
   return (
     <Box
       sx={{
@@ -32,9 +36,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
         sx={{
           position: "fixed",
           top: 16,
-          right: 70, // 오른쪽 여백 추가하여 화면 중앙 쪽으로 이동
+          right: 70,
           display: "flex",
-          flexDirection: "column", // 위아래로 배치
+          flexDirection: "column",
           gap: 1.5,
           zIndex: 1000,
         }}
@@ -48,7 +52,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
             borderRadius: "12px",
             padding: "8px 16px",
             fontWeight: "bold",
-            minWidth: "120px", // 버튼 너비 맞추기
+            minWidth: "120px",
           }}
         >
           상담하기
@@ -64,36 +68,37 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
             borderRadius: "12px",
             padding: "8px 16px",
             fontWeight: "bold",
-            minWidth: "120px", // 버튼 너비 맞추기
+            minWidth: "120px",
           }}
         >
           포트폴리오
         </Button>
       </Box>
 
-      {/* Main Content */}
-      <Box sx={{ display: "flex", flex: 1 }}>
-        {/* Custom LNB */}
+      {/* Main Content Container */}
+      <Box
+        sx={{
+          display: "flex",
+          flex: 1,
+          justifyContent: "center",
+          width: "100%",
+        }}
+      >
+        {/* Left Side Space */}
         <Box
           sx={{
-            width: { xs: "100%", md: "0px" },
+            width: { xs: "0%", md: sideWidth },
             display: { xs: "none", md: "block" },
-            zIndex: 30,
-            position: "relative",
           }}
         >
           <CustomLNB />
         </Box>
 
-        {/* Page Content */}
+        {/* Center Content */}
         <Box
           sx={{
-            flexGrow: 1,
-            maxWidth: "1000px",
-
-            mx: "auto",
-            paddingBottom: { xs: "16px", md: "24px" },
-            paddingTop: { xs: "16px", md: "24px" },
+            width: { xs: "100%", md: contentWidth },
+            padding: { xs: "16px", md: "24px" },
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -105,6 +110,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
         >
           {children}
         </Box>
+
+        {/* Right Side Space */}
+        <Box
+          sx={{
+            width: { xs: "0%", md: sideWidth },
+            display: { xs: "none", md: "block" },
+          }}
+        />
       </Box>
 
       {/* Footer */}

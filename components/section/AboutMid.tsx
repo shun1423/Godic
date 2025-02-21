@@ -25,11 +25,11 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
 
 const CustomContainer = styled(Box)(({ theme }) => ({
   scrollMarginTop: "1rem",
-  [theme.breakpoints.up("sm")]: { scrollMarginTop: "2rem" },
-  marginBottom: "6rem",
-  paddingTop: theme.spacing(12),
+  [theme.breakpoints.up("sm")]: { scrollMarginTop: "1.5rem" },
+  marginBottom: "4rem",
+  paddingTop: theme.spacing(8),
   [theme.breakpoints.up("md")]: {
-    paddingTop: theme.spacing(16),
+    paddingTop: theme.spacing(10),
   },
 }));
 
@@ -53,7 +53,11 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
       container
       spacing={2}
       direction={reverse ? "row-reverse" : "row"}
-      sx={{ marginBottom: "8rem", alignItems: "center", padding: "50px" }}
+      sx={{
+        marginBottom: "5rem",
+        alignItems: "center",
+        padding: { xs: "30px", md: "40px" },
+      }}
     >
       <Grid item xs={12} md={7}>
         <ImageWrapper>
@@ -76,7 +80,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
       <Grid item xs={12} md={5}>
         <Box
           sx={{
-            padding: "2rem",
+            padding: { xs: "1.5rem", md: "2rem" },
             textAlign: "initial",
           }}
         >
@@ -92,7 +96,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
     <Box sx={{ backgroundColor: "#F4F4F4" }}>
       <CustomContainer id="about">
         <Container maxWidth="md">
-          <Box sx={{ textAlign: "center", mb: { xs: 6, md: 10 } }}>
+          <Box sx={{ textAlign: "center", mb: { xs: 4, md: 6 } }}>
             <Typography
               component="span"
               sx={{
@@ -102,7 +106,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
                 letterSpacing: "0.1em",
                 textTransform: "uppercase",
                 display: "block",
-                marginBottom: 2,
+                marginBottom: 1.5,
               }}
             >
               Our Expertise
@@ -114,7 +118,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
               sx={{
                 color: "#1a1a1a",
                 letterSpacing: "0.02em",
-                marginBottom: { xs: 3, md: 4 },
+                marginBottom: { xs: 2, md: 3 },
                 fontSize: { xs: "2.5rem", md: "3.5rem" },
               }}
             >
@@ -135,7 +139,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
           </Box>
         </Container>
         <Container maxWidth="lg">
-          <Grid item xs={12} sx={{ paddingBottom: 10 }}>
+          <Grid item xs={12} sx={{ paddingBottom: 6 }}>
             <ImageWrapper>
               <Image
                 alt="gothic image1"
@@ -158,7 +162,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
               )}
             </ImageWrapper>
           </Grid>
-          <Grid item xs={12} sx={{ padding: { xs: "1.5rem", md: "2rem" } }}>
+          <Grid item xs={12} sx={{ padding: { xs: "1rem", md: "1.5rem" } }}>
             <Box>
               <Collapse in={showMore} timeout="auto" unmountOnExit>
                 <Box
@@ -167,8 +171,8 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
                     flexDirection: { xs: "column", md: "row" },
                     justifyContent: "space-between",
                     alignItems: "flex-start",
-                    marginBottom: "2.5rem",
-                    gap: { xs: "1.5rem", md: "2rem" },
+                    marginBottom: "2rem",
+                    gap: { xs: "1rem", md: "1.5rem" },
                   }}
                 >
                   <Typography
@@ -204,7 +208,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
                     flexDirection: { xs: "column", md: "row" },
                     justifyContent: "space-between",
                     alignItems: "flex-start",
-                    gap: { xs: "1.5rem", md: "2rem" },
+                    gap: { xs: "1rem", md: "1.5rem" },
                   }}
                 >
                   <Typography
@@ -260,6 +264,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
         </>,
         false
       )}
+
       {renderSection(
         "/Godic3.jpeg",
         <>
@@ -281,6 +286,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
         </>,
         true
       )}
+
       {renderSection(
         "/Godic8.jpeg",
         <>
@@ -292,11 +298,11 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
               marginBottom: "1rem",
             }}
           >
-            현대적이고 미니멀한 디자인
+            세련되고 미니멀한 디자인
           </Typography>
           <Typography>
-            세련된 사무실 디자인으로 이미지를 새롭게 합니다. 최신 트렌드를
-            반영하여 유행에 뒤처지지 않는 공간을 만들어 드립니다.
+            불필요하고 거추장스러운 디자인 없이 효율적이고 세련된 디자인을 추구
+            합니다. 미니멀 하고 트렌드에 뒤처지지 않는 공간을 만들어 드립니다.
           </Typography>
         </>,
         false

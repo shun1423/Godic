@@ -68,18 +68,6 @@ const CustomLNB: React.FC = () => {
   return (
     <CustomDrawer variant="permanent" anchor="left">
       <LogoContainer>
-        <ImageWrapper>
-          <Image
-            src="/회사로고.jpeg"
-            alt="Company Logo"
-            width={80} // 120px에서 80px로 축소
-            height={35} // 비율 유지를 위해 조정
-            style={{
-              objectFit: "contain",
-              maxHeight: "100%",
-            }}
-          />
-        </ImageWrapper>
         <NameLogo
           bgColor="white"
           color="#383838"
