@@ -31,6 +31,7 @@ const ImageWrapper = styled(Box)<BoxProps>(({ theme }) => ({
 
 const CustomContainer = styled(Box)<BoxProps>(({ theme }) => ({
   scrollMarginTop: "1rem",
+  marginBottom: "8rem",
   [theme.breakpoints.up("sm")]: {
     scrollMarginTop: "2rem",
   },
