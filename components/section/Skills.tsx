@@ -1,123 +1,80 @@
 import * as React from "react";
 import {
-  Container,
-  ContainerProps,
-  Grid,
-  GridProps,
-  Typography,
-  styled,
   Box,
-  Paper,
+  Container,
+  Typography,
+  Grid,
+  useTheme,
+  useMediaQuery,
 } from "@mui/material";
-import ContainerGrid from "components/common/ContainerGrid";
 import ComponentsContext from "context/componentsContext";
-import { Construction, Hardware, Work } from "@mui/icons-material";
 import {
-  PenTool,
-  Ruler,
-  FileStack,
-  Briefcase,
-  Wrench,
-  Settings,
-  CheckCircle2,
-} from "lucide-react";
+  Construction,
+  DesignServices,
+  Engineering,
+  Carpenter,
+  NetworkCheck,
+  CleaningServices,
+  LocalShipping,
+  Build,
+} from "@mui/icons-material";
 
-interface SkillsProps {}
-
-const CustomContainer = styled(Container)<ContainerProps>(({ theme }) => ({
-  marginBottom: "10rem",
-  marginTop: "10rem",
-  scrollMarginTop: "2rem",
-}));
-
-const ServiceCard = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(4),
-  height: "100%",
-  display: "flex",
-  flexDirection: "column",
-  alignItems: "center",
-  transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-  cursor: "pointer",
-  backgroundColor: "#ffffff",
-  maxWidth: "400px", // 이 부분만 추가
-  margin: "0 auto", // 이 부분만 추가
-  "&:hover": {
-    transform: "translateY(-8px)",
-    boxShadow: theme.shadows[8],
-  },
-}));
-
-const CustomGridItem = styled(Grid)<GridProps>(() => ({
-  alignItems: "stretch",
-  marginBottom: "2rem",
-}));
-
-const StyledIcon = styled(Box)(({ theme }) => ({
-  "& svg": {
-    width: "24px",
-    height: "24px",
-    strokeWidth: 1.5,
-    color: theme.palette.primary.main,
-  },
-}));
-
-const FeatureList = styled(Box)(({ theme }) => ({
-  width: "100%",
-  marginTop: theme.spacing(3),
-  "& > div": {
-    display: "flex",
-    alignItems: "center",
-    marginBottom: theme.spacing(1.5),
-    "& svg": {
-      marginRight: theme.spacing(1),
-      color: theme.palette.success.main,
-    },
-  },
-}));
-
-const Skills: React.FunctionComponent<SkillsProps> = (props) => {
+const Skills: React.FC = () => {
   const { containerMaxWidth } = React.useContext(ComponentsContext);
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
-  const skills = [
+  const services = [
     {
-      Icon: <Hardware fontSize="large" sx={{ color: "#000000" }} />,
-      title: "공사",
-      description:
-        "인테리어, 간판, 집기 설치부터 네트워크까지 통합 구축 서비스",
-      features: [
-        "인테리어",
-        "옥외간판 설치",
-        "냉낭반기 설치",
-        "사무용가구 납품 및 설치",
-        "네트워크 공사",
-      ],
-      extraIcons: [
-        <StyledIcon key="1">
-          <PenTool />
-        </StyledIcon>,
-        <StyledIcon key="2">
-          <Ruler />
-        </StyledIcon>,
-      ],
+      phase: "STEP 1",
+      title: "공간 설계",
+      icon: <DesignServices sx={{ fontSize: 40 }} />,
+      color: "#2196f3",
+      description: "효율적인 업무 동선과 공간 활용을 고려한 맞춤형 설계",
     },
     {
-      Icon: <Work fontSize="large" sx={{ color: "#000000" }} />,
-      title: "관리",
-      description: "청소, 이사, 유지보수 등 사무실 종합 관리 서비스",
-      features: [
-        "전문청소",
-        "기업이사",
-        "유지보수",
-        "레이아웃 변경 (자리이동)",
-      ],
-      extraIcons: [
-        <StyledIcon key="1">
-          <FileStack />
-        </StyledIcon>,
-        <StyledIcon key="2">
-          <Briefcase />
-        </StyledIcon>,
-      ],
+      phase: "STEP 2",
+      title: "인테리어",
+      icon: <Construction sx={{ fontSize: 40 }} />,
+      color: "#ff9800",
+      description: "기업의 아이덴티티를 반영한 감각적인 인테리어 시공",
+    },
+    {
+      phase: "STEP 3",
+      title: "설비 구축",
+      icon: <Engineering sx={{ fontSize: 40 }} />,
+      color: "#4caf50",
+      description: "냉난방 시스템 및 기반 시설 설치",
+    },
+    {
+      phase: "STEP 4",
+      title: "가구 세팅",
+      icon: <Carpenter sx={{ fontSize: 40 }} />,
+      color: "#9c27b0",
+      description: "사무용 가구 납품 및 최적의 배치",
+    },
+  ];
+
+  const managementServices = [
+    {
+      icon: <CleaningServices sx={{ fontSize: 32 }} />,
+      title: "전문 청소",
+      description: "정기적인 전문 청소로 쾌적한 환경 유지",
+    },
+    {
+      icon: <LocalShipping sx={{ fontSize: 32 }} />,
+      title: "기업 이사",
+      description: "체계적인 이사 프로세스로 빠르고 안전하게",
+    },
+    {
+      icon: <Build sx={{ fontSize: 32 }} />,
+      title: "유지 보수",
+      description: "24시간 신속한 시설 관리 서비스",
+    },
+    {
+      icon: <NetworkCheck sx={{ fontSize: 32 }} />,
+      title: "네트워크",
+      description: "안정적인 네트워크 환경 구축 및 관리",
     },
   ];
 
@@ -131,161 +88,297 @@ const Skills: React.FunctionComponent<SkillsProps> = (props) => {
     "함께한기업7.png",
   ];
 
+  const duplicatedLogos = [...companyLogos, ...companyLogos];
+
   return (
-    <Box
-      sx={{
-        py: 12,
-        width: "100%",
-        background: "#ffffff",
-        overflow: "hidden",
-      }}
-    >
-      <CustomContainer id="skills" maxWidth={containerMaxWidth}>
-        <Box sx={{ textAlign: "center", mb: 8 }}>
+    <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: "#ffffff" }}>
+      <Container maxWidth={containerMaxWidth}>
+        {/* Main Title Section */}
+        <Box sx={{ textAlign: "center", mb: { xs: 10, md: 15 } }}>
           <Typography
-            component="h2"
             variant="h3"
-            fontWeight="800"
+            gutterBottom
             sx={{
-              mb: 2,
-              color: "#000000",
+              fontWeight: 800,
+              fontSize: { xs: "2rem", md: "2.5rem" },
+              mb: 3,
             }}
           >
             오피스 종합 솔루션
           </Typography>
           <Typography
             variant="h6"
-            color="text.secondary"
-            sx={{ maxWidth: "800px", mx: "auto", px: 2 }}
+            sx={{
+              maxWidth: 800,
+              mx: "auto",
+              color: "text.secondary",
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.6,
+            }}
           >
-            스마트하고 효율적인 업무 환경을 위한 맞춤형 솔루션을 제공합니다
+            스마트하고 효율적인 업무 환경을 위한 맞춤형 솔루션
           </Typography>
         </Box>
 
-        <ContainerGrid marginTop="3rem">
-          {skills.map((skill, index) => (
-            <CustomGridItem
-              item
-              key={`${skill.title} - ${index}`}
-              xs={12}
-              md={6} // sm={6}, md={4} 에서 변경
-            >
-              <ServiceCard elevation={2}>
-                <Box sx={{ mb: 3 }}>{skill.Icon}</Box>
-                <Typography
-                  variant="h5"
-                  component="h3"
-                  fontWeight="700"
-                  sx={{ mb: 2 }}
-                >
-                  {skill.title}
-                </Typography>
-                <Typography
-                  variant="body1"
-                  color="text.secondary"
-                  sx={{ mb: 3 }}
-                >
-                  {skill.description}
-                </Typography>
-                <FeatureList>
-                  {skill.features.map((feature, i) => (
-                    <Box key={i}>
-                      <CheckCircle2 size={20} />
-                      <Typography variant="body2">{feature}</Typography>
-                    </Box>
-                  ))}
-                </FeatureList>
-                <Grid
-                  container
-                  spacing={2}
-                  justifyContent="center"
-                  sx={{ mt: "auto", pt: 3 }}
-                >
-                  {skill.extraIcons.map((extraIcon, i) => (
-                    <Grid item key={i}>
-                      {extraIcon}
-                    </Grid>
-                  ))}
-                </Grid>
-              </ServiceCard>
-            </CustomGridItem>
-          ))}
-        </ContainerGrid>
-      </CustomContainer>
+        {/* Construction Process Timeline */}
+        <Box sx={{ position: "relative", mb: { xs: 15, md: 20 } }}>
+          {!isMobile && (
+            <Box
+              sx={{
+                position: "absolute",
+                top: "50%",
+                left: "10%",
+                right: "10%",
+                height: "2px",
+                bgcolor: "grey.200",
+                zIndex: 0,
+              }}
+            />
+          )}
 
-      <Container
-        maxWidth="lg"
-        sx={{
-          mt: 12,
-          mb: 8,
-          position: "relative",
-          backgroundColor: "#ffffff",
-          px: { xs: 2, sm: 4, md: 6 },
-        }}
-      >
-        <Box
-          sx={{
-            textAlign: "center",
-            mb: 8,
-            position: "relative",
-          }}
-        >
+          <Grid container spacing={4}>
+            {services.map((service, index) => (
+              <Grid item xs={12} md={3} key={index}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    textAlign: "center",
+                    "& .MuiSvgIcon-root": {
+                      color: "white",
+                    },
+                  }}
+                >
+                  <Box
+                    sx={{
+                      width: 80,
+                      height: 80,
+                      borderRadius: "50%",
+                      bgcolor: service.color,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      mx: "auto",
+                      mb: 3,
+                      position: "relative",
+                      zIndex: 1,
+                    }}
+                  >
+                    {service.icon}
+                  </Box>
+                  <Typography
+                    sx={{
+                      color: service.color,
+                      fontWeight: "bold",
+                      mb: 2,
+                      fontSize: "1rem",
+                    }}
+                  >
+                    {service.phase}
+                  </Typography>
+                  <Typography
+                    variant="h6"
+                    sx={{
+                      fontWeight: "bold",
+                      mb: 2,
+                      fontSize: { xs: "1.25rem", md: "1.5rem" },
+                    }}
+                  >
+                    {service.title}
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "text.secondary",
+                      fontSize: "1rem",
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    {service.description}
+                  </Typography>
+                </Box>
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        {/* Management Services */}
+        <Box sx={{ mb: { xs: 15, md: 20 }, textAlign: "center" }}>
           <Typography
-            component="h2"
             variant="h3"
-            fontWeight="800"
-            sx={{ mb: 3 }}
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: "2rem", md: "2.5rem" },
+              mb: 3,
+            }}
+          >
+            통합 관리 서비스
+          </Typography>
+          <Typography
+            sx={{
+              maxWidth: 800,
+              mx: "auto",
+              mb: 8,
+              color: "text.secondary",
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.6,
+            }}
+          >
+            개별 맞춤형 관리로 완벽한 업무 환경을 유지해드립니다
+          </Typography>
+
+          <Box
+            sx={{
+              display: "grid",
+              gridTemplateColumns: {
+                xs: "1fr",
+                sm: "1fr 1fr",
+                md: "1fr 1fr 1fr 1fr",
+              },
+              gap: 4,
+            }}
+          >
+            {managementServices.map((service, index) => (
+              <Box
+                key={index}
+                sx={{
+                  p: 4,
+                  borderRadius: 2,
+                  bgcolor: "grey.50",
+                  transition: "transform 0.2s",
+                  "&:hover": {
+                    transform: "translateY(-8px)",
+                    bgcolor: "grey.100",
+                  },
+                }}
+              >
+                <Box
+                  sx={{
+                    mb: 3,
+                    color: "primary.main",
+                  }}
+                >
+                  {service.icon}
+                </Box>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "bold",
+                    mb: 2,
+                    fontSize: { xs: "1.25rem", md: "1.5rem" },
+                  }}
+                >
+                  {service.title}
+                </Typography>
+                <Typography
+                  sx={{
+                    color: "text.secondary",
+                    fontSize: "1rem",
+                    lineHeight: 1.6,
+                  }}
+                >
+                  {service.description}
+                </Typography>
+              </Box>
+            ))}
+          </Box>
+        </Box>
+
+        {/* Partners Section */}
+        <Box sx={{ textAlign: "center", mb: { xs: 8, md: 10 } }}>
+          <Typography
+            variant="h3"
+            sx={{
+              fontWeight: 800,
+              fontSize: { xs: "2rem", md: "2.5rem" },
+              mb: 3,
+            }}
           >
             신뢰할 수 있는 파트너
           </Typography>
           <Typography
-            variant="h6"
-            color="text.secondary"
-            sx={{ maxWidth: "800px", mx: "auto", mb: 6 }}
+            sx={{
+              maxWidth: 800,
+              mx: "auto",
+              mb: 8,
+              color: "text.secondary",
+              fontSize: { xs: "1rem", md: "1.125rem" },
+              lineHeight: 1.6,
+            }}
           >
             국내 유수 기업들과 함께 성장하고 있습니다
           </Typography>
-          <Grid
-            container
-            spacing={4}
-            justifyContent="center"
-            alignItems="center"
+
+          {/* Marquee Container */}
+          <Box
             sx={{
-              gap: { xs: 3, sm: 4, lg: 5 },
-              maxWidth: "100%",
-              mx: "auto",
+              overflow: "hidden",
+              position: "relative",
+              bgcolor: "#ffffff",
+              py: 4,
+              "&::before, &::after": {
+                content: '""',
+                position: "absolute",
+                top: 0,
+                width: "100px",
+                height: "100%",
+                zIndex: 1,
+              },
+              "&::before": {
+                left: 0,
+                background:
+                  "linear-gradient(to right, #ffffff 0%, transparent 100%)",
+              },
+              "&::after": {
+                right: 0,
+                background:
+                  "linear-gradient(to left, #ffffff 0%, transparent 100%)",
+              },
             }}
           >
-            {companyLogos.map((logo, index) => (
-              <Grid
-                item
-                xs={6}
-                sm={4}
-                md={2}
-                key={index}
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  transition: "transform 0.3s ease-in-out",
-                  "&:hover": {
-                    transform: "scale(1.05)",
-                  },
-                }}
-              >
-                <img
-                  src={`/${logo}`}
-                  alt={`Partner company logo ${index + 1}`}
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                    maxHeight: "48px",
-                    objectFit: "contain",
+            <Box
+              sx={{
+                display: "flex",
+                animation: "marquee 40s linear infinite",
+                "@keyframes marquee": {
+                  "0%": { transform: "translateX(0)" },
+                  "100%": { transform: "translateX(-50%)" },
+                },
+                "&:hover": {
+                  animationPlayState: "paused",
+                },
+              }}
+            >
+              {duplicatedLogos.map((logo, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    minWidth: "180px",
+                    px: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
                   }}
-                />
-              </Grid>
-            ))}
-          </Grid>
+                >
+                  <img
+                    src={`/${logo}`}
+                    alt={`Partner company logo ${index + 1}`}
+                    style={{
+                      maxWidth: "100%",
+                      height: "40px",
+                      objectFit: "contain",
+                      opacity: 0.7,
+                      transition: "all 0.3s ease",
+                    }}
+                    onMouseOver={(e) => {
+                      e.currentTarget.style.opacity = "1";
+                    }}
+                    onMouseOut={(e) => {
+                      e.currentTarget.style.opacity = "0.7";
+                    }}
+                  />
+                </Box>
+              ))}
+            </Box>
+          </Box>
         </Box>
       </Container>
     </Box>

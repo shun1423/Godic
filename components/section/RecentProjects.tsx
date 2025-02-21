@@ -71,7 +71,19 @@ const RecentProjects: React.FunctionComponent<RecentProjectsProps> = () => {
             fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
           }}
         >
-          번거롭고 애매모호한 사무실 관리 힘드셨죠?
+          번거롭고 애매모호한 사무실 관리
+        </Typography>
+        <Typography
+          variant="h3"
+          sx={{
+            marginBottom: "1.5rem",
+            color: "#1a1a1a",
+            fontWeight: 800,
+            letterSpacing: "-0.02em",
+            fontSize: { xs: "2rem", sm: "2.5rem", md: "3rem" },
+          }}
+        >
+          힘드셨죠?
         </Typography>
         <Typography
           variant="h5"
