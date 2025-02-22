@@ -29,7 +29,7 @@ const navLinks: NavLink[] = [
   },
   {
     buttonProps: { color: "info" },
-    href: "/#skills",
+    href: "/#aboutmid",
     Icon: <ConstructionIcon color="inherit" fontSize="inherit" />,
     label: "사무실 공사",
     order: 2,
