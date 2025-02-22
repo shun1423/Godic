@@ -94,7 +94,7 @@ const AboutMid: React.FunctionComponent<AboutProps> = () => {
 
   return (
     <Box sx={{ backgroundColor: "#F4F4F4" }}>
-      <CustomContainer id="about">
+      <CustomContainer id="aboutmid">
         <Container maxWidth="md">
           <Box sx={{ textAlign: "center", mb: { xs: 4, md: 6 } }}>
             <Typography
