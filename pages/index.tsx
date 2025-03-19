@@ -20,7 +20,6 @@ const Home: NextPage = () => {
   return (
     <>
       <MainLayout pageData={pages!.home}>
-        <HomeHero />
         <About />
         <Skills />
         <AboutMid />

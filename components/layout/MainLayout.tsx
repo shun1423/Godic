@@ -1,6 +1,5 @@
 import * as React from "react";
-import Head from "next/head";
-import { Box, Button } from "@mui/material";
+import { Box, Button, useMediaQuery, useTheme } from "@mui/material";
 import { useRouter } from "next/router";
 import CustomAppBar from "components/common/CustomAppBar";
 import Footer from "components/section/Footer";
@@ -12,10 +11,14 @@ interface MainLayoutProps {
   pageData?: Page;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ children }) => {
   const router = useRouter();
+  const theme = useTheme();
 
-  // Calculate the ratios for the layout
+  // md 이하를 "모바일"로 간주
+  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+
+  // 3단 레이아웃 폭 (데스크톱)
   const sideWidth = "20%";
   const contentWidth = "60%";
 
@@ -28,22 +31,24 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
         minHeight: "100vh",
       }}
     >
-      {/* AppBar */}
-      <CustomAppBar />
+      {/* 모바일일 때만 AppBar 보이기 */}
+      {isMobile && <CustomAppBar />}
 
-      {/* 오른쪽 상단 고정 버튼 */}
+      {/* 오른쪽 고정 버튼들 (모바일/데스크톱 공통) */}
       <Box
         sx={{
           position: "fixed",
-          top: 16,
-          right: 70,
+          // 데스크톱: top: 46, right: 70
+          // 모바일: bottom: 24, right: 16 (예시)
+          top: isMobile ? "auto" : 46,
+          bottom: isMobile ? 44 : "auto",
+          right: isMobile ? 16 : 70,
           display: "flex",
           flexDirection: "column",
           gap: 1.5,
           zIndex: 1000,
         }}
       >
-        {/* 상담하기 버튼 */}
         <Button
           variant="contained"
           color="primary"
@@ -58,7 +63,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
           상담하기
         </Button>
 
-        {/* 포트폴리오 버튼 */}
         <Button
           variant="outlined"
           color="primary"
@@ -75,7 +79,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
         </Button>
       </Box>
 
-      {/* Main Content Container */}
+      {/* 메인 컨텐츠 영역 */}
       <Box
         sx={{
           display: "flex",
@@ -84,25 +88,23 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
           width: "100%",
         }}
       >
-        {/* Left Side Space */}
-        <Box
-          sx={{
-            width: { xs: "0%", md: sideWidth },
-            display: { xs: "none", md: "block" },
-          }}
-        >
-          <CustomLNB />
-        </Box>
+        {/* 데스크톱에서만 LNB 노출 */}
+        {!isMobile && (
+          <Box
+            sx={{
+              width: sideWidth,
+              display: "block",
+            }}
+          >
+            <CustomLNB />
+          </Box>
+        )}
 
-        {/* Center Content */}
+        {/* 가운데 컨텐츠 */}
         <Box
           sx={{
-            width: { xs: "100%", md: contentWidth },
-            padding: { xs: "16px", md: "24px" },
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
+            width: isMobile ? "100%" : contentWidth,
+            padding: { xs: 2, md: 3 },
             backgroundColor: "#fff",
             borderRadius: 1,
             boxShadow: 1,
@@ -111,16 +113,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ children, pageData }) => {
           {children}
         </Box>
 
-        {/* Right Side Space */}
-        <Box
-          sx={{
-            width: { xs: "0%", md: sideWidth },
-            display: { xs: "none", md: "block" },
-          }}
-        />
+        {/* 오른쪽 여백 (데스크톱만) */}
+        {!isMobile && (
+          <Box
+            sx={{
+              width: sideWidth,
+              display: "block",
+            }}
+          />
+        )}
       </Box>
 
-      {/* Footer */}
+      {/* 하단 Footer */}
       <Footer />
     </Box>
   );

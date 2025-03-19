@@ -7,23 +7,23 @@ import {
   useTheme,
   useMediaQuery,
 } from "@mui/material";
-import ComponentsContext from "context/componentsContext";
 import {
   Construction,
   DesignServices,
-  Engineering,
-  Carpenter,
+  TableRestaurant,
+  Chair,
   NetworkCheck,
   CleaningServices,
   LocalShipping,
-  Build,
+  Handyman,
 } from "@mui/icons-material";
 
 const Skills: React.FC = () => {
-  const { containerMaxWidth } = React.useContext(ComponentsContext);
   const theme = useTheme();
+  // md 이하를 모바일로 간주
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
 
+  // 시공 단계
   const services = [
     {
       phase: "STEP 1",
@@ -41,43 +41,49 @@ const Skills: React.FC = () => {
     },
     {
       phase: "STEP 3",
-      title: "설비 구축",
-      icon: <Engineering sx={{ fontSize: 40 }} />,
+      title: "사무용 가구",
+      icon: <Chair sx={{ fontSize: 40 }} />,
       color: "#4caf50",
-      description: "냉난방 시스템 및 기반 시설 설치",
+      description: "품질과 디자인을 고려한 최적의 사무용 가구 선정 및 납품",
     },
     {
       phase: "STEP 4",
-      title: "가구 세팅",
-      icon: <Carpenter sx={{ fontSize: 40 }} />,
+      title: "통합 관리",
+      icon: <Handyman sx={{ fontSize: 40 }} />,
       color: "#9c27b0",
-      description: "사무용 가구 납품 및 최적의 배치",
+      description: "안정적인 업무 환경을 위한 지속적인 유지 관리 서비스",
     },
   ];
 
+  // 사무실 통합 관리 서비스
   const managementServices = [
     {
-      icon: <CleaningServices sx={{ fontSize: 32 }} />,
+      icon: <CleaningServices sx={{ fontSize: 32, color: "#9c27b0" }} />,
       title: "전문 청소",
       description: "정기적인 전문 청소로 쾌적한 환경 유지",
+      color: "#9c27b0",
     },
     {
-      icon: <LocalShipping sx={{ fontSize: 32 }} />,
+      icon: <LocalShipping sx={{ fontSize: 32, color: "#9c27b0" }} />,
       title: "기업 이사",
       description: "체계적인 이사 프로세스로 빠르고 안전하게",
+      color: "#9c27b0",
     },
     {
-      icon: <Build sx={{ fontSize: 32 }} />,
+      icon: <Handyman sx={{ fontSize: 32, color: "#9c27b0" }} />,
       title: "유지 보수",
-      description: "24시간 신속한 시설 관리 서비스",
+      description: "신속한 시설 관리 서비스로 문제 해결",
+      color: "#9c27b0",
     },
     {
-      icon: <NetworkCheck sx={{ fontSize: 32 }} />,
+      icon: <NetworkCheck sx={{ fontSize: 32, color: "#9c27b0" }} />,
       title: "네트워크",
       description: "안정적인 네트워크 환경 구축 및 관리",
+      color: "#9c27b0",
     },
   ];
 
+  // 파트너 로고들
   const companyLogos = [
     "함께한기업1.png",
     "함께한기업2.png",
@@ -88,13 +94,14 @@ const Skills: React.FC = () => {
     "함께한기업7.png",
   ];
 
+  // 마케트 효과를 위해 로고 목록을 2배로 (무한 롤링)
   const duplicatedLogos = [...companyLogos, ...companyLogos];
 
   return (
-    <Box sx={{ py: { xs: 8, md: 12 }, bgcolor: "#ffffff" }}>
-      <Container maxWidth={containerMaxWidth}>
-        {/* Main Title Section */}
-        <Box sx={{ textAlign: "center", mb: { xs: 10, md: 15 } }}>
+    <Box sx={{ py: { xs: 6, md: 12 }, bgcolor: "#ffffff" }}>
+      <Container maxWidth="lg">
+        {/* 메인 타이틀 섹션 */}
+        <Box sx={{ textAlign: "center", mb: { xs: 8, md: 12 } }}>
           <Typography
             variant="h3"
             gutterBottom
@@ -120,25 +127,13 @@ const Skills: React.FC = () => {
           </Typography>
         </Box>
 
-        {/* Construction Process Timeline */}
-        <Box sx={{ position: "relative", mb: { xs: 15, md: 20 } }}>
-          {!isMobile && (
-            <Box
-              sx={{
-                position: "absolute",
-                top: "50%",
-                left: "10%",
-                right: "10%",
-                height: "2px",
-                bgcolor: "grey.200",
-                zIndex: 0,
-              }}
-            />
-          )}
+        {/* 시공 프로세스 (타임라인 제거) */}
+        <Box sx={{ position: "relative", mb: { xs: 10, md: 15 } }}>
+          {/* 타임라인 가로선 제거 */}
 
           <Grid container spacing={4}>
             {services.map((service, index) => (
-              <Grid item xs={12} md={3} key={index}>
+              <Grid item xs={12} sm={6} md={3} key={index}>
                 <Box
                   sx={{
                     position: "relative",
@@ -200,14 +195,15 @@ const Skills: React.FC = () => {
           </Grid>
         </Box>
 
-        {/* Management Services */}
-        <Box sx={{ mb: { xs: 15, md: 20 }, textAlign: "center" }}>
+        {/* 통합 관리 서비스 - 글자 크기 축소 및 디자인 통일 */}
+        <Box sx={{ mb: { xs: 10, md: 15 }, textAlign: "center" }}>
           <Typography
-            variant="h3"
+            variant="h4" // h3에서 h4로 크기 축소
             sx={{
               fontWeight: 800,
-              fontSize: { xs: "2rem", md: "2.5rem" },
+              fontSize: { xs: "1.75rem", md: "2.25rem" }, // 크기 축소
               mb: 3,
+              color: "#9c27b0", // 통합 관리 테마 컬러와 통일
             }}
           >
             통합 관리 서비스
@@ -216,9 +212,9 @@ const Skills: React.FC = () => {
             sx={{
               maxWidth: 800,
               mx: "auto",
-              mb: 8,
+              mb: 6, // 간격 축소
               color: "text.secondary",
-              fontSize: { xs: "1rem", md: "1.125rem" },
+              fontSize: { xs: "0.9rem", md: "1rem" }, // 크기 축소
               lineHeight: 1.6,
             }}
           >
@@ -233,37 +229,31 @@ const Skills: React.FC = () => {
                 sm: "1fr 1fr",
                 md: "1fr 1fr 1fr 1fr",
               },
-              gap: 4,
+              gap: 3, // 간격 축소
             }}
           >
             {managementServices.map((service, index) => (
               <Box
                 key={index}
                 sx={{
-                  p: 4,
+                  p: 3,
                   borderRadius: 2,
-                  bgcolor: "grey.50",
-                  transition: "transform 0.2s",
+                  bgcolor: `${service.color}05`, // 매우 연한 테마 컬러 배경
+                  border: `1px solid ${service.color}20`, // 테마 컬러 테두리
+                  transition: "transform 0.2s, box-shadow 0.2s",
                   "&:hover": {
                     transform: "translateY(-8px)",
-                    bgcolor: "grey.100",
+                    boxShadow: `0 5px 15px ${service.color}30`,
                   },
                 }}
               >
-                <Box
-                  sx={{
-                    mb: 3,
-                    color: "primary.main",
-                  }}
-                >
-                  {service.icon}
-                </Box>
+                <Box sx={{ mb: 2 }}>{service.icon}</Box>
                 <Typography
                   variant="h6"
                   sx={{
                     fontWeight: "bold",
-                    mb: 2,
-                    fontSize: { xs: "1.25rem", md: "1.5rem" },
+                    mb: 1.5,
+                    fontSize: { xs: "1.1rem", md: "1.25rem" }, // 크기 축소
                   }}
                 >
                   {service.title}
@@ -271,7 +261,7 @@ const Skills: React.FC = () => {
                 <Typography
                   sx={{
                     color: "text.secondary",
-                    fontSize: "1rem",
+                    fontSize: { xs: "0.9rem", md: "0.95rem" }, // 크기 축소
                     lineHeight: 1.6,
                   }}
                 >
@@ -282,7 +272,7 @@ const Skills: React.FC = () => {
           </Box>
         </Box>
 
-        {/* Partners Section */}
+        {/* 파트너 섹션 */}
         <Box sx={{ textAlign: "center", mb: { xs: 8, md: 10 } }}>
           <Typography
             variant="h3"
@@ -307,52 +297,28 @@ const Skills: React.FC = () => {
             국내 유수 기업들과 함께 성장하고 있습니다
           </Typography>
 
-          {/* Marquee Container */}
-          <Box
-            sx={{
-              overflow: "hidden",
-              position: "relative",
-              bgcolor: "#ffffff",
-              py: 4,
-              "&::before, &::after": {
-                content: '""',
-                position: "absolute",
-                top: 0,
-                width: "100px",
-                height: "100%",
-                zIndex: 1,
-              },
-              "&::before": {
-                left: 0,
-                background:
-                  "linear-gradient(to right, #ffffff 0%, transparent 100%)",
-              },
-              "&::after": {
-                right: 0,
-                background:
-                  "linear-gradient(to left, #ffffff 0%, transparent 100%)",
-              },
-            }}
-          >
+          {/* 
+            모바일에서는 정적으로 나열,
+            데스크톱에서는 마케트(무한 롤링) 
+          */}
+          {isMobile ? (
+            // ------------------
+            // 1) 모바일: 정적 리스트
+            // ------------------
             <Box
               sx={{
                 display: "flex",
-                animation: "marquee 40s linear infinite",
-                "@keyframes marquee": {
-                  "0%": { transform: "translateX(0)" },
-                  "100%": { transform: "translateX(-50%)" },
-                },
-                "&:hover": {
-                  animationPlayState: "paused",
-                },
+                flexWrap: "wrap",
+                justifyContent: "center",
+                gap: 4,
+                py: 4,
               }}
             >
-              {duplicatedLogos.map((logo, index) => (
+              {companyLogos.map((logo, index) => (
                 <Box
                   key={index}
                   sx={{
-                    minWidth: "180px",
-                    px: 3,
+                    width: { xs: "120px", sm: "150px" },
                     display: "flex",
                     alignItems: "center",
                     justifyContent: "center",
@@ -362,8 +328,8 @@ const Skills: React.FC = () => {
                     src={`/${logo}`}
                     alt={`Partner company logo ${index + 1}`}
                     style={{
-                      maxWidth: "100%",
-                      height: "40px",
+                      width: "100%",
+                      height: "auto",
                       objectFit: "contain",
                       opacity: 0.7,
                       transition: "all 0.3s ease",
@@ -378,7 +344,82 @@ const Skills: React.FC = () => {
                 </Box>
               ))}
             </Box>
-          </Box>
+          ) : (
+            // ------------------
+            // 2) 데스크톱: 무한 롤링(마케트)
+            // ------------------
+            <Box
+              sx={{
+                overflow: "hidden",
+                position: "relative",
+                bgcolor: "#ffffff",
+                py: 4,
+                "&::before, &::after": {
+                  content: '""',
+                  position: "absolute",
+                  top: 0,
+                  width: "100px",
+                  height: "100%",
+                  zIndex: 1,
+                },
+                "&::before": {
+                  left: 0,
+                  background:
+                    "linear-gradient(to right, #ffffff 0%, transparent 100%)",
+                },
+                "&::after": {
+                  right: 0,
+                  background:
+                    "linear-gradient(to left, #ffffff 0%, transparent 100%)",
+                },
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  animation: "marquee 40s linear infinite",
+                  "@keyframes marquee": {
+                    "0%": { transform: "translateX(0)" },
+                    "100%": { transform: "translateX(-50%)" },
+                  },
+                  "&:hover": {
+                    animationPlayState: "paused",
+                  },
+                }}
+              >
+                {duplicatedLogos.map((logo, index) => (
+                  <Box
+                    key={index}
+                    sx={{
+                      minWidth: "180px",
+                      px: 3,
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <img
+                      src={`/${logo}`}
+                      alt={`Partner company logo ${index + 1}`}
+                      style={{
+                        maxWidth: "100%",
+                        height: "40px",
+                        objectFit: "contain",
+                        opacity: 0.7,
+                        transition: "all 0.3s ease",
+                      }}
+                      onMouseOver={(e) => {
+                        e.currentTarget.style.opacity = "1";
+                      }}
+                      onMouseOut={(e) => {
+                        e.currentTarget.style.opacity = "0.7";
+                      }}
+                    />
+                  </Box>
+                ))}
+              </Box>
+            </Box>
+          )}
         </Box>
       </Container>
     </Box>
