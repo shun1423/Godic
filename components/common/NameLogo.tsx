@@ -8,6 +8,7 @@ interface NameLogoProps {
   fontSize?: Property.FontSize;
   name?: string;
   onClick?: () => void;
+  style?: React.CSSProperties;
 }
 
 const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
@@ -18,10 +19,12 @@ const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
     fontSize = "inherit",
     name = "Name",
     onClick,
+    style,
   } = props;
+
   return (
     <div
-      onClick={onClick && onClick}
+      onClick={onClick}
       style={{
         alignItems: "center",
         cursor: "pointer",
@@ -31,24 +34,22 @@ const NameLogo: React.FunctionComponent<NameLogoProps> = (props) => {
         position: "relative",
         width: "auto",
         height: "60px",
-        padding: "0px 8px",
+        padding: "0px",
+        paddingTop: "5px", // 위쪽 패딩을 추가하여 텍스트를 아래로 이동
+        ...style,
       }}
     >
       <p
         style={{
-          color: "#2C3E50",
-          padding: "4px 8px",
-          fontSize: "28px",
-          fontWeight: "800",
+          color: "#000000",
+          padding: "4px 0px",
+          fontSize: "36px",
+          fontWeight: 800,
           position: "relative",
           whiteSpace: "nowrap",
-          letterSpacing: "1.5px",
+          letterSpacing: "0.5px",
           margin: 0,
           fontFamily: "'Montserrat', sans-serif",
-          background: "linear-gradient(135deg, #2C3E50 0%, #3498DB 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-          textShadow: "1px 1px 1px rgba(0,0,0,0.1)",
           transition: "all 0.3s ease",
         }}
       >
